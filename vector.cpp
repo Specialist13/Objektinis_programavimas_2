@@ -31,7 +31,7 @@ double mediana(vector<int> &pazymiai, int &egzaminas){
 void isvestis_i_konsole (vector<Stud> &studentai){
     cout << std::left<<std::setw(25) <<"Vardas"<<std::setw(25)<<"Pavarde"<<std::setw(25)<<"Galutinis (Vid.)"<<std::setw(25)<<"/ Galutinis (Med.)"<<"\n"<<string(100, '-')<<"\n";
     for (auto &x:studentai){
-        cout << std::left<<std::setw(25)<< x.vardas << std::setw(25)<< x.pavarde << std::setw(25)<< std::fixed << std::setprecision(2) <<vidurkis(x.pazymiai, x.egzaminas) << std::setw(25)<<mediana(x.pazymiai, x.egzaminas)<< "\n";
+        cout << std::left<<std::setw(25)<< x.vardas << std::setw(25)<< x.pavarde << std::setw(25)<< std::fixed << std::setprecision(2) <<x.galutinis_vid << std::setw(25)<<x.galutinis_med<< "\n";
     }
 }
 
@@ -41,7 +41,7 @@ void isvestis_i_faila (vector<Stud> &studentai){
     ss << std::left<<std::setw(25) <<"Vardas"<<std::setw(25)<<"Pavarde"<<std::setw(25)<<"Galutinis (Vid.)"<<std::setw(25)<<"/ Galutinis (Med.)"<<"\n"<<string(100, '-')<<"\n";
     ss << std::fixed << std::setprecision(2);
     for (auto &x:studentai){
-        ss << std::left<<std::setw(25)<< x.vardas << std::setw(25)<< x.pavarde << std::setw(25)<<vidurkis(x.pazymiai, x.egzaminas) << std::setw(25)<<mediana(x.pazymiai, x.egzaminas)<< "\n";
+        ss << std::left<<std::setw(25)<< x.vardas << std::setw(25)<< x.pavarde << std::setw(25)<<x.galutinis_vid << std::setw(25)<<x.galutinis_med<< "\n";
     }
     fr << ss.str();
     fr.close();
@@ -110,6 +110,8 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
         }
         tekstas="Įveskite studento egzamino pažymį: ";
         laikinas.egzaminas=skaiciu_ivesties_tikrinimas(tekstas);
+        laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
+        laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }
@@ -135,7 +137,9 @@ void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
             int pazymys=rand()%10+1;
             laikinas.pazymiai.push_back(pazymys);
         }
-        laikinas.egzaminas=rand()%10+1;;
+        laikinas.egzaminas=rand()%10+1;
+        laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
+        laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }
@@ -195,7 +199,9 @@ void visko_generavimas (Stud &laikinas, vector<Stud> &studentai){
             int pazymys=rand()%10+1;
             laikinas.pazymiai.push_back(pazymys);
         }
-        laikinas.egzaminas=rand()%10+1;;
+        laikinas.egzaminas=rand()%10+1;
+        laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
+        laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }
@@ -223,6 +229,8 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas)
         }
         laikinas.egzaminas=laikinas.pazymiai.back();
         laikinas.pazymiai.pop_back();
+        laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
+        laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }

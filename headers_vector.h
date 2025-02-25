@@ -16,4 +16,6 @@ struct Stud {
     string vardas, pavarde;
     vector<int> pazymiai;
     int egzaminas;
+    double galutinis_vid;
+    double galutinis_med;
 };
