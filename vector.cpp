@@ -1,6 +1,6 @@
 #include "headers_vector.h"
 
-double vidurkis(vector<int> pazymiai, int egzaminas){
+double vidurkis(vector<int> &pazymiai, int &egzaminas){
     if (pazymiai.size() == 0) {
         return egzaminas*0.6;
     }
@@ -12,7 +12,7 @@ double vidurkis(vector<int> pazymiai, int egzaminas){
     return vid;
 }
 
-double mediana(vector<int> pazymiai, int egzaminas){
+double mediana(vector<int> &pazymiai, int &egzaminas){
     if (pazymiai.size() == 0) {
         return egzaminas*0.6;
     }
@@ -28,11 +28,23 @@ double mediana(vector<int> pazymiai, int egzaminas){
     return med;
 }
 
-void isvestis (vector<Stud> studentai){
-    cout << std::left<<std::setw(25) <<"Vardas"<<std::setw(25)<<"Pavarde"<<std::setw(25)<<"Galutinis (Vid.)"<<std::setw(25)<<"/ Galutinis (Med.)\n"<<"-----------------------------------------------------------------\n";
-    for (auto x:studentai){
-        cout << std::left<<std::setw(25)<< x.vardas << std::setw(25)<< x.pavarde << std::setw(25)<< std::fixed << std::setprecision(2) <<vidurkis(x.pazymiai, x.egzaminas) << std::setw(25)<<mediana(x.pazymiai, x.egzaminas)<< endl;
+void isvestis_i_konsole (vector<Stud> &studentai){
+    cout << std::left<<std::setw(25) <<"Vardas"<<std::setw(25)<<"Pavarde"<<std::setw(25)<<"Galutinis (Vid.)"<<std::setw(25)<<"/ Galutinis (Med.)"<<"\n"<<string(100, '-')<<"\n";
+    for (auto &x:studentai){
+        cout << std::left<<std::setw(25)<< x.vardas << std::setw(25)<< x.pavarde << std::setw(25)<< std::fixed << std::setprecision(2) <<vidurkis(x.pazymiai, x.egzaminas) << std::setw(25)<<mediana(x.pazymiai, x.egzaminas)<< "\n";
     }
+}
+
+void isvestis_i_faila (vector<Stud> &studentai){
+    std::stringstream ss;
+    std::ofstream fr("rezultatai.txt");
+    ss << std::left<<std::setw(25) <<"Vardas"<<std::setw(25)<<"Pavarde"<<std::setw(25)<<"Galutinis (Vid.)"<<std::setw(25)<<"/ Galutinis (Med.)"<<"\n"<<string(100, '-')<<"\n";
+    ss << std::fixed << std::setprecision(2);
+    for (auto &x:studentai){
+        ss << std::left<<std::setw(25)<< x.vardas << std::setw(25)<< x.pavarde << std::setw(25)<<vidurkis(x.pazymiai, x.egzaminas) << std::setw(25)<<mediana(x.pazymiai, x.egzaminas)<< "\n";
+    }
+    fr << ss.str();
+    fr.close();
 }
 
 int skaiciu_ivesties_tikrinimas(string &tekstas) {
@@ -49,6 +61,26 @@ int skaiciu_ivesties_tikrinimas(string &tekstas) {
             cin.ignore();
             return reiksme;
         }
+    }
+}
+
+void isvesties_pasirinkimas(vector<Stud> &studentai){
+    string tekstas="1 - Išvesti rezultatus į konsolę\n2 - Išvesti rezultatus į failą\nPasirinkite išvedimo būdą: ";
+    int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    while (pasirinkimas<1 || pasirinkimas>2){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+        pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    }
+    switch(pasirinkimas){
+        case 1:
+            isvestis_i_konsole(studentai);
+            break;
+        case 2:
+            isvestis_i_faila(studentai);
+            break;
+        default:
+            cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+            return;
     }
 }
 
@@ -81,7 +113,7 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }
-    isvestis(studentai);
+    isvesties_pasirinkimas(studentai);
     studentai.clear();
     laikinas.vardas.clear();
 }
@@ -107,7 +139,7 @@ void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }
-    isvestis(studentai);
+    isvesties_pasirinkimas(studentai);
     studentai.clear();
     laikinas.vardas.clear();
 }
@@ -167,7 +199,7 @@ void visko_generavimas (Stud &laikinas, vector<Stud> &studentai){
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }
-    isvestis(studentai);
+    isvesties_pasirinkimas(studentai);
     studentai.clear();
     laikinas.vardas.clear();
 }
@@ -194,6 +226,10 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas)
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }
+    fd.close();
+    isvesties_pasirinkimas(studentai);
+    studentai.clear();
+    laikinas.vardas.clear();
 }
 
 void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
