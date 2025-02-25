@@ -1,6 +1,9 @@
 #include "headers_vector.h"
 
 double vidurkis(vector<int> pazymiai, int egzaminas){
+    if (pazymiai.size() == 0) {
+        return egzaminas*0.6;
+    }
     double vid = 0;
     for (int i=0; i<pazymiai.size(); i++){
         vid += pazymiai[i];
@@ -10,6 +13,9 @@ double vidurkis(vector<int> pazymiai, int egzaminas){
 }
 
 double mediana(vector<int> pazymiai, int egzaminas){
+    if (pazymiai.size() == 0) {
+        return egzaminas*0.6;
+    }
     double med = 0;
     std::sort(pazymiai.begin(), pazymiai.end());
     if (pazymiai.size() % 2 == 0) {
@@ -61,11 +67,7 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
         while (true){
             tekstas="Įveskite pažymį: ";
             int pazymys=skaiciu_ivesties_tikrinimas(tekstas);
-            if (pazymys==0 && laikinas.pazymiai.size()==0){
-                cout<<"Studentas turi turėti bent vieną pažymį. Bandykite dar kartą.\n";
-                continue;
-            }
-            else if (pazymys==0){
+            if (pazymys==0){
                 break;
             }
             else if (pazymys<0 || pazymys>10){
@@ -170,34 +172,44 @@ void visko_generavimas (Stud &laikinas, vector<Stud> &studentai){
     laikinas.vardas.clear();
 }
 
+void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas){
+    std::ifstream fd(failas);
+    if (fd.fail()){
+        cout<<"Failas nerastas.\n";
+        return;
+    }
+
+
+}
+
 int main(){
     Stud laikinas;
     vector<Stud> studentai;
     int rezimas=0;
     cout<<"Sveiki!\n";
-    while (rezimas!=4){
-        string tekstas="Pasirinkite programos režimą.\n1 - Duomenų įvedimas ranka\n2 - Pažymių generavimas\n3 - Pažymių ir vardų generavimas\n4 - Baigti darbą\nIveskite pasirinkimą: ";
+    while (rezimas!=5){
+        string tekstas="Pasirinkite programos režimą.\n1 - Duomenų įvedimas ranka\n2 - Pažymių generavimas\n3 - Pažymių ir vardų generavimas\n4 - Skaityti duomenis iš failo\n5 - Baigti darbą\nIveskite pasirinkimą: ";
         rezimas=skaiciu_ivesties_tikrinimas(tekstas);
-        if (rezimas==4){
-            cout<<"Viso gero!\n";
-            break;
-        }
-
-        else if (rezimas==1){
-            ranka(laikinas, studentai);
-        }
-
-        else if (rezimas==2){
-            pazymiu_generavimas(laikinas, studentai);
-        }
-
-        else if (rezimas==3){
-            visko_generavimas(laikinas, studentai);
-        }
-
-        else {
-            cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
-        }        
+        switch(rezimas){
+            case 1:
+                ranka(laikinas, studentai);
+                break;
+            case 2:
+                pazymiu_generavimas(laikinas, studentai);
+                break;
+            case 3:
+                visko_generavimas(laikinas, studentai);
+                break;
+            case 4:
+                skaitymas_is_failo(laikinas, studentai);
+                break;
+            case 5:
+                cout<<"Viso gero!\n";
+                break;
+            default:
+                cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+                break;
+        }      
     }
     return 0;
 }
