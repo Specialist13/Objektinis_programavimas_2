@@ -64,7 +64,57 @@ int skaiciu_ivesties_tikrinimas(string &tekstas) {
     }
 }
 
+bool raktas_v(Stud a, Stud b){
+    return a.vardas<b.vardas;
+}
+bool raktas_p(Stud a, Stud b){
+    return a.pavarde<b.pavarde;
+}
+bool raktas_gv(Stud a, Stud b){
+    return a.galutinis_vid<b.galutinis_vid;
+}
+bool raktas_gm(Stud a, Stud b){
+    return a.galutinis_med<b.galutinis_med;
+}
+void rikiavimas (vector<Stud> &studentai){
+    string tekstas="1 - Rikiuoti pagal vardą\n2 - Rikiuoti pagal pavardę\n3 - Rikiuoti pagal galutinį pažymį iš vidurkio\n4 - Rikiuoti pagal galutinį pažymį iš medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo būdą: ";
+    int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    while (pasirinkimas<1 || pasirinkimas>4){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+        pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    }
+    switch (pasirinkimas){
+        case 1:
+            std::sort(studentai.begin(), studentai.end(), raktas_v);
+            break;
+        case 2:
+            std::sort(studentai.begin(), studentai.end(), raktas_p);
+            break;
+        case 3:
+            std::sort(studentai.begin(), studentai.end(), raktas_gv);
+            break;
+        case 4:
+            std::sort(studentai.begin(), studentai.end(), raktas_gm);
+            break;
+        case 5:
+            break;
+        default:
+            cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+            return;
+    }
+    tekstas="1 - Rikiuoti didėjančia tvarka\n2 - Rikiuoti mažėjančia tvarka\nPasirinkite rikiavimo tvarką: ";
+    pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    while (pasirinkimas<1 || pasirinkimas>2){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+        pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    }
+    if (pasirinkimas==2){
+        std::reverse(studentai.begin(), studentai.end());
+    }
+}
+
 void isvesties_pasirinkimas(vector<Stud> &studentai){
+    rikiavimas(studentai);
     string tekstas="1 - Išvesti rezultatus į konsolę\n2 - Išvesti rezultatus į failą\nPasirinkite išvedimo būdą: ";
     int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     while (pasirinkimas<1 || pasirinkimas>2){
