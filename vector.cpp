@@ -178,8 +178,53 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas)
         cout<<"Failas nerastas.\n";
         return;
     }
+    std::stringstream ss;
+    ss << fd.rdbuf();
+    string linija;
+    std::getline(ss, linija);
+    while (std::getline(ss, linija)){
+        std::istringstream iss(linija);
+        iss >> laikinas.vardas >> laikinas.pavarde;
+        int pazymys;
+        while (iss >> pazymys){
+            laikinas.pazymiai.push_back(pazymys);
+        }
+        laikinas.egzaminas=laikinas.pazymiai.back();
+        laikinas.pazymiai.pop_back();
+        studentai.push_back(laikinas);
+        laikinas.pazymiai.clear();
+    }
+}
 
-
+void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
+    string failas;
+    string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite failą: ";
+    int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    while (pasirinkimas<1 || pasirinkimas>4){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+        pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    }
+    switch(pasirinkimas){
+        case 1:
+            failas="kursiokai.txt";
+            skaitymas_is_failo(laikinas, studentai, failas);
+            break;
+        case 2:
+            failas="studentai10000.txt";
+            skaitymas_is_failo(laikinas, studentai, failas);
+            break;
+        case 3:
+            failas="studentai100000.txt";
+            skaitymas_is_failo(laikinas, studentai, failas);
+            break;
+        case 4:
+            failas="studentai1000000.txt";
+            skaitymas_is_failo(laikinas, studentai, failas);
+            break;
+        default:
+            cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+            return;
+    }
 }
 
 int main(){
@@ -201,7 +246,7 @@ int main(){
                 visko_generavimas(laikinas, studentai);
                 break;
             case 4:
-                skaitymas_is_failo(laikinas, studentai);
+                failo_pasirinkimas(laikinas, studentai);
                 break;
             case 5:
                 cout<<"Viso gero!\n";
