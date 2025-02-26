@@ -1,3 +1,6 @@
+#ifndef HEADERS_VECTOR_H
+#define HEADERS_VECTOR_H
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -20,3 +23,5 @@ struct Stud {
     double galutinis_vid;
     double galutinis_med;
 };
+
+#endif
