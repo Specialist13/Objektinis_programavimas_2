@@ -2,6 +2,7 @@
 #include "isvesties_rezimai.h"
 #include "ivesties_rezimai.h"
 #include "ivesties_tikrinimas.h"
+#include "rikiavimo_funckija.h"
 
 
 void isvesties_pasirinkimas(vector<Stud> &studentai){

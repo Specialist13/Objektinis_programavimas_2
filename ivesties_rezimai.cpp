@@ -1,6 +1,7 @@
 #include "ivesties_rezimai.h"
 #include "ivesties_tikrinimas.h"
 #include "skaiciavimo_funkcijos.h"
+#include "vartotojo_pasirinkimo_funkcijos.h"
 
 void ranka (Stud &laikinas, vector<Stud> &studentai){
     string tekstas;
