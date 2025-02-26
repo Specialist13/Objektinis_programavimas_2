@@ -53,7 +53,7 @@ int skaiciu_ivesties_tikrinimas(string &tekstas) {
         cout << tekstas;
         cin >> reiksme;
         if (cin.fail()) {
-            cout << "Įveskite tinkamą skaičių!\n";
+            cout << "Iveskite tinkama skaiciu!\n";
             cin.clear();
             cin.ignore();
         }
@@ -77,10 +77,10 @@ bool raktas_gm(Stud a, Stud b){
     return a.galutinis_med<b.galutinis_med;
 }
 void rikiavimas (vector<Stud> &studentai){
-    string tekstas="1 - Rikiuoti pagal vardą\n2 - Rikiuoti pagal pavardę\n3 - Rikiuoti pagal galutinį pažymį iš vidurkio\n4 - Rikiuoti pagal galutinį pažymį iš medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo būdą: ";
+    string tekstas="1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal galutini pazymi is vidurkio\n4 - Rikiuoti pagal galutini pazymi is medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo buda: ";
     int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
-    while (pasirinkimas<1 || pasirinkimas>4){
-        cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+    while (pasirinkimas<1 || pasirinkimas>5){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     }
     switch (pasirinkimas){
@@ -99,13 +99,16 @@ void rikiavimas (vector<Stud> &studentai){
         case 5:
             break;
         default:
-            cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+            cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
             return;
     }
-    tekstas="1 - Rikiuoti didėjančia tvarka\n2 - Rikiuoti mažėjančia tvarka\nPasirinkite rikiavimo tvarką: ";
+    if (pasirinkimas==5){
+        return;
+    }
+    tekstas="1 - Rikiuoti didejancia tvarka\n2 - Rikiuoti mazejancia tvarka\nPasirinkite rikiavimo tvarka: ";
     pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     while (pasirinkimas<1 || pasirinkimas>2){
-        cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     }
     if (pasirinkimas==2){
@@ -115,10 +118,10 @@ void rikiavimas (vector<Stud> &studentai){
 
 void isvesties_pasirinkimas(vector<Stud> &studentai){
     rikiavimas(studentai);
-    string tekstas="1 - Išvesti rezultatus į konsolę\n2 - Išvesti rezultatus į failą\nPasirinkite išvedimo būdą: ";
+    string tekstas="1 - Isvesti rezultatus i konsole\n2 - Isvesti rezultatus i faila\nPasirinkite isvedimo buda: ";
     int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     while (pasirinkimas<1 || pasirinkimas>2){
-        cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     }
     switch(pasirinkimas){
@@ -129,36 +132,36 @@ void isvesties_pasirinkimas(vector<Stud> &studentai){
             isvestis_i_faila(studentai);
             break;
         default:
-            cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+            cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
             return;
     }
 }
 
 void ranka (Stud &laikinas, vector<Stud> &studentai){
     string tekstas;
-    cout<<"Veskite duomenis apie studentus. Kai norėsite baigti, įveskite 'n' kaip studento vardą.\n";
+    cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
-        cout << "Įveskite studento vardą: ";
+        cout << "Iveskite studento vardA: ";
         cin >> laikinas.vardas;
         if (laikinas.vardas=="n"){
             break;
         }
-        cout << "Įveskite studento pavardę: ";
+        cout << "Iveskite studento pavarde: ";
         cin >> laikinas.pavarde;
-        cout<<"Veskite jo pažymius. Kai norėsite baigti, įveskite '0'.\n";
+        cout<<"Veskite jo pazymius. Kai noresite baigti, iveskite '0'.\n";
         while (true){
-            tekstas="Įveskite pažymį: ";
+            tekstas="Iveskite pazymi: ";
             int pazymys=skaiciu_ivesties_tikrinimas(tekstas);
             if (pazymys==0){
                 break;
             }
             else if (pazymys<0 || pazymys>10){
-                cout<<"Neteisingas pažymys. Bandykite dar kartą.\n";
+                cout<<"Neteisingas pazymys. Bandykite dar karta.\n";
                 continue;
             }
             laikinas.pazymiai.push_back(pazymys);
         }
-        tekstas="Įveskite studento egzamino pažymį: ";
+        tekstas="Iveskite studento egzamino pazymy: ";
         laikinas.egzaminas=skaiciu_ivesties_tikrinimas(tekstas);
         laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
         laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
@@ -173,14 +176,14 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
 void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
     srand(time(NULL));
 
-    cout<<"Veskite duomenis apie studentus. Kai norėsite baigti, įveskite 'n' kaip studento vardą.\n";
+    cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
-        cout << "Įveskite studento vardą: ";
+        cout << "Iveskite studento vardq: ";
         cin >> laikinas.vardas;
         if (laikinas.vardas=="n"){
             break;
         }
-        cout << "Įveskite studento pavardę: ";
+        cout << "Iveskite studento pavarde: ";
         cin >> laikinas.pavarde;
         int n=rand()%10+1;
         for (int j=0; j<n; j++){
@@ -268,6 +271,7 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas)
     }
     std::stringstream ss;
     ss << fd.rdbuf();
+    fd.close();
     string linija;
     std::getline(ss, linija);
     while (std::getline(ss, linija)){
@@ -284,18 +288,54 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas)
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }
-    fd.close();
+    
     isvesties_pasirinkimas(studentai);
     studentai.clear();
     laikinas.vardas.clear();
 }
 
+void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas){
+    std::chrono::duration<double> laiku_suma{0};
+    for (int i=0; i<5; i++){
+        std::ifstream fd(failas);
+        if (fd.fail()){
+            cout<<"Failas nerastas.\n";
+            return;
+        }
+        auto pradzia=std::chrono::high_resolution_clock::now();
+        std::stringstream ss;
+        ss << fd.rdbuf();
+        fd.close();
+        string linija;
+        std::getline(ss, linija);
+        while (std::getline(ss, linija)){
+            std::istringstream iss(linija);
+            iss >> laikinas.vardas >> laikinas.pavarde;
+            int pazymys;
+            while (iss >> pazymys){
+                laikinas.pazymiai.push_back(pazymys);
+            }
+            laikinas.egzaminas=laikinas.pazymiai.back();
+            laikinas.pazymiai.pop_back();
+            laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
+            laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
+            studentai.push_back(laikinas);
+            laikinas.pazymiai.clear();
+        }
+        auto pabaiga=std::chrono::high_resolution_clock::now();
+        laiku_suma+=pabaiga-pradzia;
+        studentai.clear();
+        laikinas.vardas.clear();
+    }
+    cout<<"Skaitymo is failo laikas: "<<laiku_suma.count()/5<<" s\n";
+}
+
 void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
     string failas;
-    string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite failą: ";
+    string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite faila: ";
     int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     while (pasirinkimas<1 || pasirinkimas>4){
-        cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     }
     switch(pasirinkimas){
@@ -316,7 +356,38 @@ void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
             skaitymas_is_failo(laikinas, studentai, failas);
             break;
         default:
-            cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+            cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+            return;
+    }
+}
+
+void testavimas(Stud &laikinas, vector<Stud> &studentai){
+    string failas;
+    string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite faila testavimui: ";
+    int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    while (pasirinkimas<1 || pasirinkimas>4){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+        pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    }
+    switch(pasirinkimas){
+        case 1:
+            failas="kursiokai.txt";
+            testinis_skaitymas_is_failo(laikinas, studentai, failas);
+            break;
+        case 2:
+            failas="studentai10000.txt";
+            testinis_skaitymas_is_failo(laikinas, studentai, failas);
+            break;
+        case 3:
+            failas="studentai100000.txt";
+            testinis_skaitymas_is_failo(laikinas, studentai, failas);
+            break;
+        case 4:
+            failas="studentai1000000.txt";
+            testinis_skaitymas_is_failo(laikinas, studentai, failas);
+            break;
+        default:
+            cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
             return;
     }
 }
@@ -326,8 +397,8 @@ int main(){
     vector<Stud> studentai;
     int rezimas=0;
     cout<<"Sveiki!\n";
-    while (rezimas!=5){
-        string tekstas="Pasirinkite programos režimą.\n1 - Duomenų įvedimas ranka\n2 - Pažymių generavimas\n3 - Pažymių ir vardų generavimas\n4 - Skaityti duomenis iš failo\n5 - Baigti darbą\nIveskite pasirinkimą: ";
+    while (rezimas!=6){
+        string tekstas="Pasirinkite programos rezima.\n1 - Duomenu ivedimas ranka\n2 - Pazymiu generavimas\n3 - Pazymiu ir vardu generavimas\n4 - Skaityti duomenis is failo\n5 - Testuoti ivesties laika\n6 - Baigti darba\nIveskite pasirinkima: ";
         rezimas=skaiciu_ivesties_tikrinimas(tekstas);
         switch(rezimas){
             case 1:
@@ -343,10 +414,13 @@ int main(){
                 failo_pasirinkimas(laikinas, studentai);
                 break;
             case 5:
+                testavimas(laikinas, studentai);
+                break;
+            case 6:
                 cout<<"Viso gero!\n";
                 break;
             default:
-                cout<<"Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
                 break;
         }      
     }
