@@ -141,7 +141,7 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
     string tekstas;
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
-        cout << "Iveskite studento vardA: ";
+        cout << "Iveskite studento varda: ";
         cin >> laikinas.vardas;
         if (laikinas.vardas=="n"){
             break;
@@ -161,7 +161,7 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
             }
             laikinas.pazymiai.push_back(pazymys);
         }
-        tekstas="Iveskite studento egzamino pazymy: ";
+        tekstas="Iveskite studento egzamino pazymi: ";
         laikinas.egzaminas=skaiciu_ivesties_tikrinimas(tekstas);
         laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
         laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
@@ -178,7 +178,7 @@ void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
 
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
-        cout << "Iveskite studento vardq: ";
+        cout << "Iveskite studento varda: ";
         cin >> laikinas.vardas;
         if (laikinas.vardas=="n"){
             break;
