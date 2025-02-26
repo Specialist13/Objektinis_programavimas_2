@@ -1,9 +1,9 @@
-#include "headers_vector.h"
-#include "ivesties_rezimai.h"
-#include "ivesties_tikrinimas.h"
-#include "isvesties_rezimai.h"
-#include "testavimo_funkcijos.h"
-#include "vartotojo_pasirinkimo_funkcijos.h"
+#include "../include/headers_vector.h"
+#include "../include/ivesties_rezimai.h"
+#include "../include/ivesties_tikrinimas.h"
+#include "../include/isvesties_rezimai.h"
+#include "../include/testavimo_funkcijos.h"
+#include "../include/vartotojo_pasirinkimo_funkcijos.h"
 
 int main(){
     Stud laikinas;
