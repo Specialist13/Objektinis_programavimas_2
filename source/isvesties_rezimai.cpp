@@ -1,4 +1,4 @@
-#include "isvesties_rezimai.h"
+#include "../include/isvesties_rezimai.h"
 
 void isvestis_i_konsole (vector<Stud> &studentai){
     cout << std::left<<std::setw(25) <<"Vardas"<<std::setw(25)<<"Pavarde"<<std::setw(25)<<"Galutinis (Vid.)"<<std::setw(25)<<"/ Galutinis (Med.)"<<"\n"<<string(100, '-')<<"\n";

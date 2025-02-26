@@ -1,5 +1,5 @@
-#include "rikiavimo_funckija.h"
-#include "ivesties_tikrinimas.h"
+#include "../include/rikiavimo_funckija.h"
+#include "../include/ivesties_tikrinimas.h"
 
 bool raktas_v(Stud a, Stud b){
     return a.vardas<b.vardas;

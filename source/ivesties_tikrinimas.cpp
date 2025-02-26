@@ -1,4 +1,4 @@
-#include "ivesties_tikrinimas.h"
+#include "../include/ivesties_tikrinimas.h"
 
 int skaiciu_ivesties_tikrinimas(string &tekstas) {
     int reiksme;

@@ -1,6 +1,6 @@
-#include "testavimo_funkcijos.h"
-#include "ivesties_tikrinimas.h"
-#include "skaiciavimo_funkcijos.h"
+#include "../include/testavimo_funkcijos.h"
+#include "../include/ivesties_tikrinimas.h"
+#include "../include/skaiciavimo_funkcijos.h"
 
 void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas){
     std::chrono::duration<double> laiku_suma{0};

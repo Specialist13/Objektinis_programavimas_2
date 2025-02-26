@@ -1,4 +1,4 @@
-#include "skaiciavimu_funkcijos.h"
+#include "../include/skaiciavimo_funkcijos.h"
 
 double vidurkis(vector<int> &pazymiai, int &egzaminas){
     if (pazymiai.size() == 0) {
