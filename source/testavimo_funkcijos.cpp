@@ -7,8 +7,7 @@ void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, strin
     for (int i=0; i<5; i++){
         std::ifstream fd(failas);
         if (fd.fail()){
-            cout<<"Failas nerastas.\n";
-            return;
+            throw "Failas nerastas.";
         }
         auto pradzia=std::chrono::high_resolution_clock::now();
         std::stringstream ss;
@@ -39,32 +38,18 @@ void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, strin
 }
 
 void testavimas(Stud &laikinas, vector<Stud> &studentai){
-    string failas;
+    string failai[] = {"kursiokai.txt", "studentai10000.txt", "studentai100000.txt", "studentai1000000.txt"};
     string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite faila testavimui: ";
     int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     while (pasirinkimas<1 || pasirinkimas>4){
         cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     }
-    switch(pasirinkimas){
-        case 1:
-            failas="kursiokai.txt";
-            testinis_skaitymas_is_failo(laikinas, studentai, failas);
-            break;
-        case 2:
-            failas="studentai10000.txt";
-            testinis_skaitymas_is_failo(laikinas, studentai, failas);
-            break;
-        case 3:
-            failas="studentai100000.txt";
-            testinis_skaitymas_is_failo(laikinas, studentai, failas);
-            break;
-        case 4:
-            failas="studentai1000000.txt";
-            testinis_skaitymas_is_failo(laikinas, studentai, failas);
-            break;
-        default:
-            cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-            return;
+    try {
+        testinis_skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1]);
+    }
+    catch (const char* klaida){
+        cout<<klaida<<endl;
+        testavimas(laikinas, studentai);
     }
 }
