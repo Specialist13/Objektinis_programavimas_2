@@ -8,7 +8,7 @@ int ivesties_tikrinimas(string &tekstas) {
         if (cin.fail()) {
             cin.clear();
             cin.ignore();
-            throw "Iveskite tinkama skaiciu!\n";
+            throw "Iveskite tinkama reiksme!\n";
         }
         else {
             cin.ignore();

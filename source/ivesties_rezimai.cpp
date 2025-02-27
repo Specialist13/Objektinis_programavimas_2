@@ -36,7 +36,7 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
             try {
                 pazymys=ivesties_tikrinimas(tekstas);
             }
-            catch (const char* klaida){ {
+            catch (const char* klaida){
                 cout<<klaida;
                 ivesties_tikrinimas(tekstas);
             }
@@ -71,16 +71,31 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
 
 void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
     srand(time(NULL));
-
+    string tekstas;
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
-        cout << "Iveskite studento varda: ";
-        cin >> laikinas.vardas;
+        tekstas="Iveskite studento varda: ";
+        try {
+            laikinas.vardas=ivesties_tikrinimas(tekstas);
+        }
+        catch (const char* klaida){
+            cout<<klaida;
+            ivesties_tikrinimas(tekstas);
+        }
+
         if (laikinas.vardas=="n"){
             break;
         }
-        cout << "Iveskite studento pavarde: ";
-        cin >> laikinas.pavarde;
+
+        tekstas="Iveskite studento pavarde: ";
+        try {
+            laikinas.pavarde=ivesties_tikrinimas(tekstas);
+        }
+        catch (const char* klaida){
+            cout<<klaida;
+            ivesties_tikrinimas(tekstas);
+        }
+        
         int n=rand()%10+1;
         for (int j=0; j<n; j++){
             int pazymys=rand()%10+1;

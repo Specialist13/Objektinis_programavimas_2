@@ -15,10 +15,17 @@ bool raktas_gm(Stud a, Stud b){
 }
 void rikiavimas (vector<Stud> &studentai){
     string tekstas="1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal galutini pazymi is vidurkio\n4 - Rikiuoti pagal galutini pazymi is medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo buda: ";
-    int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    int pasirinkimas;
+    try {
+        pasirinkimas=ivesties_tikrinimas(tekstas);
+    }
+    catch (const char* klaida){
+        cout<<klaida;
+        ivesties_tikrinimas(tekstas);
+    }
     while (pasirinkimas<1 || pasirinkimas>5){
         cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-        pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+        pasirinkimas=ivesties_tikrinimas(tekstas);
     }
     switch (pasirinkimas){
         case 1:
@@ -43,10 +50,16 @@ void rikiavimas (vector<Stud> &studentai){
         return;
     }
     tekstas="1 - Rikiuoti didejancia tvarka\n2 - Rikiuoti mazejancia tvarka\nPasirinkite rikiavimo tvarka: ";
-    pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    try {
+        pasirinkimas=ivesties_tikrinimas(tekstas);
+    }
+    catch (const char* klaida){
+        cout<<klaida;
+        ivesties_tikrinimas(tekstas);
+    }
     while (pasirinkimas<1 || pasirinkimas>2){
         cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-        pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+        pasirinkimas=ivesties_tikrinimas(tekstas);
     }
     if (pasirinkimas==2){
         std::reverse(studentai.begin(), studentai.end());
