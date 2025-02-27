@@ -11,6 +11,7 @@ void ivesties_tikrinimas(T &reiksme, string &tekstas) {
                 cin.ignore();
                 throw "Iveskite tinkama reiksme!\n";
             }
+            break;
         }
         catch (const char* klaida) {
             cout << klaida;
@@ -18,3 +19,6 @@ void ivesties_tikrinimas(T &reiksme, string &tekstas) {
         }
     }
 }
+
+template void ivesties_tikrinimas<int>(int&, string&);
+template void ivesties_tikrinimas<string>(string&, string&);

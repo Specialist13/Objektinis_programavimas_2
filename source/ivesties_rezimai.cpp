@@ -35,6 +35,10 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
 
         tekstas="Iveskite studento egzamino pazymi: ";
         ivesties_tikrinimas(laikinas.egzaminas, tekstas);
+        while (laikinas.egzaminas<0 || laikinas.egzaminas>10){
+            cout<<"Neteisingas pazymys. Bandykite dar karta.\n";
+            ivesties_tikrinimas(laikinas.egzaminas, tekstas);
+        }
 
         laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
         laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);

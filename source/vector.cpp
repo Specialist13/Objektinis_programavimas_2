@@ -12,7 +12,7 @@ int main(){
     cout<<"Sveiki!\n";
     while (rezimas!=6){
         string tekstas="Pasirinkite programos rezima.\n1 - Duomenu ivedimas ranka\n2 - Pazymiu generavimas\n3 - Pazymiu ir vardu generavimas\n4 - Skaityti duomenis is failo\n5 - Testuoti ivesties laika\n6 - Baigti darba\nIveskite pasirinkima: ";
-        rezimas=skaiciu_ivesties_tikrinimas(tekstas);
+        ivesties_tikrinimas(rezimas, tekstas);
         switch(rezimas){
             case 1:
                 ranka(laikinas, studentai);
