@@ -7,17 +7,40 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
     string tekstas;
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
-        cout << "Iveskite studento varda: ";
-        cin >> laikinas.vardas;
+        tekstas="Iveskite studento varda: ";
+        try {
+            laikinas.vardas=ivesties_tikrinimas(tekstas);
+        }
+        catch (const char* klaida){
+            cout<<klaida;
+            ivesties_tikrinimas(tekstas);
+        }
+
         if (laikinas.vardas=="n"){
             break;
         }
-        cout << "Iveskite studento pavarde: ";
-        cin >> laikinas.pavarde;
+
+        tekstas="Iveskite studento pavarde: ";
+        try {
+            laikinas.pavarde=ivesties_tikrinimas(tekstas);
+        }
+        catch (const char* klaida){
+            cout<<klaida;
+            ivesties_tikrinimas(tekstas);
+        }
+
         cout<<"Veskite jo pazymius. Kai noresite baigti, iveskite '0'.\n";
         while (true){
             tekstas="Iveskite pazymi: ";
-            int pazymys=skaiciu_ivesties_tikrinimas(tekstas);
+            int pazymys;
+            try {
+                pazymys=ivesties_tikrinimas(tekstas);
+            }
+            catch (const char* klaida){ {
+                cout<<klaida;
+                ivesties_tikrinimas(tekstas);
+            }
+
             if (pazymys==0){
                 break;
             }
@@ -27,8 +50,15 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
             }
             laikinas.pazymiai.push_back(pazymys);
         }
+
         tekstas="Iveskite studento egzamino pazymi: ";
-        laikinas.egzaminas=skaiciu_ivesties_tikrinimas(tekstas);
+        try {
+            laikinas.egzaminas=ivesties_tikrinimas(tekstas);
+        }
+        catch (const char* klaida){
+            cout<<klaida;
+            ivesties_tikrinimas(tekstas);
+        }
         laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
         laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
         studentai.push_back(laikinas);
