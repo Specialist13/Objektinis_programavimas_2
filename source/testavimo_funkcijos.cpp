@@ -40,7 +40,14 @@ void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, strin
 void testavimas(Stud &laikinas, vector<Stud> &studentai){
     string failai[] = {"kursiokai.txt", "studentai10000.txt", "studentai100000.txt", "studentai1000000.txt"};
     string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite faila testavimui: ";
-    int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
+    int pasirinkimas;
+    try {
+        pasirinkimas=ivesties_tikrinimas(tekstas);
+    }
+    catch (const char* klaida){
+        cout<<klaida<<endl;
+        return;
+    }
     while (pasirinkimas<1 || pasirinkimas>4){
         cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);

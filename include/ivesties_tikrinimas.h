@@ -3,6 +3,7 @@
 
 #include "headers_vector.h"
 
-int ivesties_tikrinimas(string &tekstas);
+template <typename T>
+void ivesties_tikrinimas(T &reiksme, string &tekstas);
 
 #endif

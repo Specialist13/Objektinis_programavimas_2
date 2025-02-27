@@ -8,38 +8,20 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
         tekstas="Iveskite studento varda: ";
-        try {
-            laikinas.vardas=ivesties_tikrinimas(tekstas);
-        }
-        catch (const char* klaida){
-            cout<<klaida;
-            ivesties_tikrinimas(tekstas);
-        }
+        ivesties_tikrinimas(laikinas.vardas, tekstas);
 
         if (laikinas.vardas=="n"){
             break;
         }
 
         tekstas="Iveskite studento pavarde: ";
-        try {
-            laikinas.pavarde=ivesties_tikrinimas(tekstas);
-        }
-        catch (const char* klaida){
-            cout<<klaida;
-            ivesties_tikrinimas(tekstas);
-        }
+        ivesties_tikrinimas(laikinas.pavarde, tekstas);
 
         cout<<"Veskite jo pazymius. Kai noresite baigti, iveskite '0'.\n";
         while (true){
             tekstas="Iveskite pazymi: ";
             int pazymys;
-            try {
-                pazymys=ivesties_tikrinimas(tekstas);
-            }
-            catch (const char* klaida){
-                cout<<klaida;
-                ivesties_tikrinimas(tekstas);
-            }
+            ivesties_tikrinimas(pazymys, tekstas);
 
             if (pazymys==0){
                 break;
@@ -52,13 +34,8 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
         }
 
         tekstas="Iveskite studento egzamino pazymi: ";
-        try {
-            laikinas.egzaminas=ivesties_tikrinimas(tekstas);
-        }
-        catch (const char* klaida){
-            cout<<klaida;
-            ivesties_tikrinimas(tekstas);
-        }
+        ivesties_tikrinimas(laikinas.egzaminas, tekstas);
+
         laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
         laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
         studentai.push_back(laikinas);
@@ -75,26 +52,14 @@ void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
         tekstas="Iveskite studento varda: ";
-        try {
-            laikinas.vardas=ivesties_tikrinimas(tekstas);
-        }
-        catch (const char* klaida){
-            cout<<klaida;
-            ivesties_tikrinimas(tekstas);
-        }
+        ivesties_tikrinimas(laikinas.vardas, tekstas);
 
         if (laikinas.vardas=="n"){
             break;
         }
 
         tekstas="Iveskite studento pavarde: ";
-        try {
-            laikinas.pavarde=ivesties_tikrinimas(tekstas);
-        }
-        catch (const char* klaida){
-            cout<<klaida;
-            ivesties_tikrinimas(tekstas);
-        }
+        ivesties_tikrinimas(laikinas.pavarde, tekstas);
         
         int n=rand()%10+1;
         for (int j=0; j<n; j++){
