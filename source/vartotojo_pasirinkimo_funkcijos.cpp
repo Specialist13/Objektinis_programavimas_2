@@ -27,32 +27,18 @@ void isvesties_pasirinkimas(vector<Stud> &studentai){
 }
 
 void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
-    string failas;
+    string failai[] = {"kursiokai.txt", "studentai10000.txt", "studentai100000.txt", "studentai1000000.txt"};
     string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite faila: ";
     int pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     while (pasirinkimas<1 || pasirinkimas>4){
         cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         pasirinkimas=skaiciu_ivesties_tikrinimas(tekstas);
     }
-    switch(pasirinkimas){
-        case 1:
-            failas="kursiokai.txt";
-            skaitymas_is_failo(laikinas, studentai, failas);
-            break;
-        case 2:
-            failas="studentai10000.txt";
-            skaitymas_is_failo(laikinas, studentai, failas);
-            break;
-        case 3:
-            failas="studentai100000.txt";
-            skaitymas_is_failo(laikinas, studentai, failas);
-            break;
-        case 4:
-            failas="studentai1000000.txt";
-            skaitymas_is_failo(laikinas, studentai, failas);
-            break;
-        default:
-            cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-            return;
+    try {
+        skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1]);
+    }
+    catch (const char* klaida){
+        cout<<klaida<<endl;
+        failo_pasirinkimas(laikinas, studentai);
     }
 }
