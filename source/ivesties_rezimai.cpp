@@ -172,3 +172,45 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas)
     studentai.clear();
     laikinas.vardas.clear();
 }
+
+void failu_generavimas(){
+    string tekstas="Iveskite, kiek studentu norite sugeneruoti: ";
+    int n;
+    ivesties_tikrinimas(n, tekstas);
+    while (n<1){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+        ivesties_tikrinimas(n, tekstas);
+    }
+    string filename = "studentai" + std::to_string(n) + ".txt";
+    std::ofstream fd(filename);
+
+    if (!fd) {
+        cout << "Nepavyko sukurti failo.\n";
+        return;
+    }
+
+    fd<<std::left<< std::setw(15) <<"Vardas"<< std::setw(15) <<"Pavarde"<< std::setw(15) <<"ND1"<<std::setw(15) <<"ND2"<<std::setw(15) <<"ND3"<<std::setw(15) <<"ND4"<< std::setw(15) <<std::setw(15) <<"ND5"<<std::setw(15) <<"Egzaminas\n";
+
+    srand(time(NULL));
+    for (int i = 0; i < n; ++i) {
+        Stud laikinas;
+        laikinas.vardas = "Vardas" + std::to_string(i + 1);
+        laikinas.pavarde = "Pavarde" + std::to_string(i + 1);
+        int pazymiu_kiekis = 5;
+        for (int j = 0; j < pazymiu_kiekis; ++j) {
+            laikinas.pazymiai.push_back(rand() % 10 + 1);
+        }
+        laikinas.egzaminas = rand() % 10 + 1;
+        laikinas.galutinis_vid = vidurkis(laikinas.pazymiai, laikinas.egzaminas);
+        laikinas.galutinis_med = mediana(laikinas.pazymiai, laikinas.egzaminas);
+
+        fd <<std::left<< std::setw(15) << laikinas.vardas << std::setw(15)  << laikinas.pavarde;
+        for (int pazymys : laikinas.pazymiai) {
+            fd <<std::left<< std::setw(15) << pazymys << " ";
+        }
+        fd <<std::left<< std::setw(15) << laikinas.egzaminas << "\n";
+    }
+
+    fd.close();
+    cout << "Failas sukurtas: " << filename << "\n";
+}
