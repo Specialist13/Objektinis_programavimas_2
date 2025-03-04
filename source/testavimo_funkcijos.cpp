@@ -1,6 +1,7 @@
 #include "../include/testavimo_funkcijos.h"
 #include "../include/ivesties_tikrinimas.h"
 #include "../include/skaiciavimo_funkcijos.h"
+#include "../include/ivesties_rezimai.h"
 
 void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas){
     std::chrono::duration<double> laiku_suma{0};
@@ -54,4 +55,22 @@ void testavimas(Stud &laikinas, vector<Stud> &studentai){
         cout<<klaida<<endl;
         testavimas(laikinas, studentai);
     }
+}
+
+void failo_kurimo_ir_duomenu_apdorojimo_testavimas (){
+    std::chrono::duration<double> laiku_suma{0};
+    string tekstas="Iveskite, kiek studentu norite sugeneruoti: ";
+    int n;
+    ivesties_tikrinimas(n, tekstas);
+    while (n<1){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+        ivesties_tikrinimas(n, tekstas);
+    }
+    for (int i=0; i<5; i++){
+        auto pradzia=std::chrono::high_resolution_clock::now();
+        failu_generavimas(n);
+        auto pabaiga=std::chrono::high_resolution_clock::now();
+        laiku_suma+=pabaiga-pradzia;
+    }
+    cout<<"Failo kurimo laikas: "<<laiku_suma.count()/5<<" s\n";
 }

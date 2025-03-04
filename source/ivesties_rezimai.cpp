@@ -173,14 +173,7 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas)
     laikinas.vardas.clear();
 }
 
-void failu_generavimas(){
-    string tekstas="Iveskite, kiek studentu norite sugeneruoti: ";
-    int n;
-    ivesties_tikrinimas(n, tekstas);
-    while (n<1){
-        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-        ivesties_tikrinimas(n, tekstas);
-    }
+void failu_generavimas(int n){
     string filename = "studentai" + std::to_string(n) + ".txt";
     std::ofstream fd(filename);
 
@@ -214,3 +207,4 @@ void failu_generavimas(){
     fd.close();
     cout << "Failas sukurtas: " << filename << "\n";
 }
+

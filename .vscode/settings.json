@@ -63,6 +63,7 @@
         "string_view": "cpp",
         "fstream": "cpp",
         "sstream": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "ratio": "cpp"
     }
 }
