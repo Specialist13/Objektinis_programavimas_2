@@ -208,3 +208,25 @@ void failu_generavimas(int n){
     cout << "Failas sukurtas: " << filename << "\n";
 }
 
+void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, vector<Stud> &studentai){
+    string tekstas="Iveskite faila is kurio norite skirstyti: ";
+    string failas;
+    ivesties_tikrinimas(failas, tekstas);
+    try {
+        skaitymas_is_failo(laikinas, studentai, failas);
+    }
+    catch (const char* klaida){
+        cout<<klaida<<endl;
+        return;
+    }
+    vector<Stud> vargsiukai, galvociai;
+    for (Stud &studentas : studentai){
+        if (studentas.galutinis_vid<5){
+            vargsiukai.push_back(studentas);
+        }
+        else {
+            galvociai.push_back(studentas);
+        }
+    }
+
+}
