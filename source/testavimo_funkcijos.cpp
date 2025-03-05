@@ -80,11 +80,41 @@ void duomenu_apdorojimo_testavimas (){
     string tekstas="Iveskite faila is kurio norite skirstyti: ";
     string failas;
     ivesties_tikrinimas(failas, tekstas);
+    cout<<"Dabar rinkites vagsiuku rikiavimo buda:\n";
+    tekstas="1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal galutini pazymi is vidurkio\n4 - Rikiuoti pagal galutini pazymi is medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo buda: ";
+    int pasirinkimas1;
+    ivesties_tikrinimas(pasirinkimas1, tekstas);
+    while (pasirinkimas1<1 || pasirinkimas1>5){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+        ivesties_tikrinimas(pasirinkimas1, tekstas);
+    }
+    tekstas="1 - Rikiuoti didejancia tvarka\n2 - Rikiuoti mazejancia tvarka\nPasirinkite rikiavimo tvarka: ";
+    int pasirinkimas2;
+    ivesties_tikrinimas(pasirinkimas2, tekstas);
+    while (pasirinkimas2<1 || pasirinkimas2>2){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+        ivesties_tikrinimas(pasirinkimas2, tekstas);
+    }
+    cout<<"Dabar rinkites galvociu rikiavimo buda:\n";
+    tekstas="1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal galutini pazymi is vidurkio\n4 - Rikiuoti pagal galutini pazymi is medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo buda: ";
+    int pasirinkimas3;
+    ivesties_tikrinimas(pasirinkimas3, tekstas);
+    while (pasirinkimas3<1 || pasirinkimas3>5){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+        ivesties_tikrinimas(pasirinkimas3, tekstas);
+    }
+    tekstas="1 - Rikiuoti didejancia tvarka\n2 - Rikiuoti mazejancia tvarka\nPasirinkite rikiavimo tvarka: ";
+    int pasirinkimas4;
+    ivesties_tikrinimas(pasirinkimas4, tekstas);
+    while (pasirinkimas4<1 || pasirinkimas4>2){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+        ivesties_tikrinimas(pasirinkimas4, tekstas);
+    }
     try {
         for (int i=0; i<5; i++){
             Stud laikinas;
             vector<Stud> studentai;
-            studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas, ivesties_suma, rusiavimo_suma, isvedimo_suma);
+            studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas, ivesties_suma, rusiavimo_suma, isvedimo_suma, pasirinkimas1, pasirinkimas2, pasirinkimas3, pasirinkimas4);
         }
         cout<<"Ivesties trukme: "<<ivesties_suma.count()/5<<" s\n";
         cout<<"Rusiavimo trukme: "<<rusiavimo_suma.count()/5<<" s\n";
