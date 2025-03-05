@@ -144,7 +144,7 @@ void visko_generavimas (Stud &laikinas, vector<Stud> &studentai){
     laikinas.vardas.clear();
 }
 
-void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas){
+void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas, bool testavimas){
     std::ifstream fd(failas);
     if (fd.fail()){
         throw "Failas nerastas.";
@@ -168,10 +168,11 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas)
         studentai.push_back(laikinas);
         laikinas.pazymiai.clear();
     }
-    
-    isvesties_pasirinkimas(studentai);
-    studentai.clear();
-    laikinas.vardas.clear();
+    if (!testavimas){
+        isvesties_pasirinkimas(studentai);
+        studentai.clear();
+        laikinas.vardas.clear();
+    }    
 }
 
 void failu_generavimas(int n){
@@ -210,7 +211,7 @@ void failu_generavimas(int n){
 }
 
 void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, vector<Stud> &studentai, string failas){
-    skaitymas_is_failo(laikinas, studentai, failas);
+    skaitymas_is_failo(laikinas, studentai, failas, true);
     vector<Stud> vargsiukai, galvociai;
     for (Stud &studentas : studentai){
         if (studentas.galutinis_vid<5){

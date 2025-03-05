@@ -37,7 +37,7 @@ void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
         ivesties_tikrinimas(pasirinkimas, tekstas);
     }
     try {
-        skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1]);
+        skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1], false);
     }
     catch (const char* klaida){
         cout<<klaida<<endl;
