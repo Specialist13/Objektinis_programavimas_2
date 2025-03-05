@@ -39,7 +39,7 @@ void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
     try {
         skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1], false);
     }
-    catch (const char* klaida){
+    catch (std::exception klaida){
         cout<<klaida<<endl;
         failo_pasirinkimas(laikinas, studentai);
     }

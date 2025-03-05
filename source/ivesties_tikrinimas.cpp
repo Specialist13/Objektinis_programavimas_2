@@ -13,7 +13,7 @@ void ivesties_tikrinimas(T &reiksme, string &tekstas) {
             }
             break;
         }
-        catch (const char* klaida) {
+        catch (std::exception klaida) {
             cout << klaida;
             cin.ignore();
         }
