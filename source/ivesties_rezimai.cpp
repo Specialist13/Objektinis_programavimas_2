@@ -147,7 +147,7 @@ void visko_generavimas (Stud &laikinas, vector<Stud> &studentai){
 void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas, bool testavimas){
     std::ifstream fd(failas);
     if (fd.fail()){
-        throw "Failas nerastas.";
+        throw std::runtime_error("Failas nerastas.");
     }
     std::stringstream ss;
     ss << fd.rdbuf();

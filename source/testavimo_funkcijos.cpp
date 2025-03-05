@@ -8,7 +8,7 @@ void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, strin
     for (int i=0; i<5; i++){
         std::ifstream fd(failas);
         if (fd.fail()){
-            throw "Failas nerastas.";
+            throw std::runtime_error("Failas nerastas.");
         }
         auto pradzia=std::chrono::high_resolution_clock::now();
         std::stringstream ss;
@@ -51,7 +51,7 @@ void testavimas(Stud &laikinas, vector<Stud> &studentai){
     try {
         testinis_skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1]);
     }
-    catch (std::exception klaida){
+    catch (std::runtime_error klaida){
         std::cerr<<klaida.what()<<endl;
         testavimas(laikinas, studentai);
     }
@@ -91,7 +91,7 @@ void duomenu_apdorojimo_testavimas (){
         cout<<"Isvedimo trukme: "<<isvedimo_suma.count()/5<<" s\n";
         cout<<"Bendra trukme: "<<(ivesties_suma.count()+rusiavimo_suma.count()+isvedimo_suma.count())/5<<" s\n";
     }
-    catch (std::exception klaida){
+    catch (std::runtime_error klaida){
         std::cerr<<klaida.what()<<endl;
         duomenu_apdorojimo_testavimas();
     }

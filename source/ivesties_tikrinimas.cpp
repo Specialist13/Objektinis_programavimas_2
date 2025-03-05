@@ -9,11 +9,11 @@ void ivesties_tikrinimas(T &reiksme, string &tekstas) {
             if (cin.fail()) {
                 cin.clear();
                 cin.ignore();
-                throw "Iveskite tinkama reiksme!\n";
+                throw std::runtime_error("Iveskite tinkama reiksme!\n");
             }
             break;
         }
-        catch (std::exception klaida) {
+        catch (std::runtime_error klaida) {
             std::cerr<<klaida.what();
             cin.ignore();
         }
