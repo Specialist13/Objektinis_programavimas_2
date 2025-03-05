@@ -7,9 +7,9 @@ void isvestis_i_konsole (vector<Stud> &studentai){
     }
 }
 
-void isvestis_i_faila (vector<Stud> &studentai){
+void isvestis_i_faila (vector<Stud> &studentai, string failas){
     std::stringstream ss;
-    std::ofstream fr("rezultatai.txt");
+    std::ofstream fr(failas);
     ss << std::left<<std::setw(25) <<"Vardas"<<std::setw(25)<<"Pavarde"<<std::setw(25)<<"Galutinis (Vid.)"<<std::setw(25)<<"/ Galutinis (Med.)"<<"\n"<<string(100, '-')<<"\n";
     ss << std::fixed << std::setprecision(2);
     for (auto &x:studentai){

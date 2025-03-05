@@ -19,7 +19,7 @@ void isvesties_pasirinkimas(vector<Stud> &studentai){
             isvestis_i_konsole(studentai);
             break;
         case 2:
-            isvestis_i_faila(studentai);
+            isvestis_i_faila(studentai, "rezultatai.txt");
             break;
         default:
             cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
