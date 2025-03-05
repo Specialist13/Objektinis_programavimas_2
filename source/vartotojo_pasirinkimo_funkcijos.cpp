@@ -40,7 +40,7 @@ void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
         skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1], false);
     }
     catch (std::exception klaida){
-        cout<<klaida<<endl;
+        std::cerr<<klaida.what()<<endl;
         failo_pasirinkimas(laikinas, studentai);
     }
 }

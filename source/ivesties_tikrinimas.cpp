@@ -14,7 +14,7 @@ void ivesties_tikrinimas(T &reiksme, string &tekstas) {
             break;
         }
         catch (std::exception klaida) {
-            cout << klaida;
+            std::cerr<<klaida.what();
             cin.ignore();
         }
     }

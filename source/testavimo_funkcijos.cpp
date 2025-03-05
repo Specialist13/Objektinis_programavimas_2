@@ -52,7 +52,7 @@ void testavimas(Stud &laikinas, vector<Stud> &studentai){
         testinis_skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1]);
     }
     catch (std::exception klaida){
-        cout<<klaida<<endl;
+        std::cerr<<klaida.what()<<endl;
         testavimas(laikinas, studentai);
     }
 }
@@ -92,7 +92,7 @@ void duomenu_apdorojimo_testavimas (){
         cout<<"Bendra trukme: "<<(ivesties_suma.count()+rusiavimo_suma.count()+isvedimo_suma.count())/5<<" s\n";
     }
     catch (std::exception klaida){
-        cout<<klaida<<endl;
+        std::cerr<<klaida.what()<<endl;
         duomenu_apdorojimo_testavimas();
     }
 }
