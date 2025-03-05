@@ -2,6 +2,7 @@
 #include "../include/ivesties_tikrinimas.h"
 #include "../include/skaiciavimo_funkcijos.h"
 #include "../include/vartotojo_pasirinkimo_funkcijos.h"
+#include "../include/isvesties_rezimai.h"
 
 void ranka (Stud &laikinas, vector<Stud> &studentai){
     string tekstas;
@@ -208,17 +209,8 @@ void failu_generavimas(int n){
     cout << "Failas sukurtas: " << filename << "\n";
 }
 
-void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, vector<Stud> &studentai){
-    string tekstas="Iveskite faila is kurio norite skirstyti: ";
-    string failas;
-    ivesties_tikrinimas(failas, tekstas);
-    try {
-        skaitymas_is_failo(laikinas, studentai, failas);
-    }
-    catch (const char* klaida){
-        cout<<klaida<<endl;
-        return;
-    }
+void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, vector<Stud> &studentai, string failas){
+    skaitymas_is_failo(laikinas, studentai, failas);
     vector<Stud> vargsiukai, galvociai;
     for (Stud &studentas : studentai){
         if (studentas.galutinis_vid<5){
@@ -228,5 +220,9 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
             galvociai.push_back(studentas);
         }
     }
-
+    isvestis_i_faila(vargsiukai, "vargsiukai.txt");
+    isvestis_i_faila(galvociai, "galvociai.txt");
+    vargsiukai.clear();
+    galvociai.clear();
+    studentai.clear();
 }

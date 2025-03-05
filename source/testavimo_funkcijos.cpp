@@ -57,7 +57,7 @@ void testavimas(Stud &laikinas, vector<Stud> &studentai){
     }
 }
 
-void failo_kurimo_ir_duomenu_apdorojimo_testavimas (){
+void failo_kurimo_testavimas (){
     std::chrono::duration<double> laiku_suma{0};
     string tekstas="Iveskite, kiek studentu norite sugeneruoti: ";
     int n;
@@ -73,4 +73,26 @@ void failo_kurimo_ir_duomenu_apdorojimo_testavimas (){
         laiku_suma+=pabaiga-pradzia;
     }
     cout<<"Failo kurimo laikas: "<<laiku_suma.count()/5<<" s\n";
+}
+
+void duomenu_apdorojimo_testavimas (){
+    std::chrono::duration<double> laiku_suma{0};
+    string tekstas="Iveskite faila is kurio norite skirstyti: ";
+    string failas;
+    ivesties_tikrinimas(failas, tekstas);
+    try {
+        for (int i=0; i<5; i++){
+            Stud laikinas;
+            vector<Stud> studentai;
+            auto pradzia=std::chrono::high_resolution_clock::now();
+            studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas);
+            auto pabaiga=std::chrono::high_resolution_clock::now();
+            laiku_suma+=pabaiga-pradzia;
+        }
+        cout<<"Duomenu apdorojimo laikas: "<<laiku_suma.count()/5<<" s\n";
+    }
+    catch (const char* klaida){
+        cout<<klaida<<endl;
+        duomenu_apdorojimo_testavimas();
+    }
 }
