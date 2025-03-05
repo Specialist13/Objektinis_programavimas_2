@@ -10,7 +10,7 @@ int main(){
     vector<Stud> studentai;
     int rezimas=0;
     cout<<"Sveiki!\n";
-    while (rezimas!=7){
+    while (rezimas!=8){
         string tekstas="Pasirinkite programos rezima.\n1 - Duomenu ivedimas ranka\n2 - Pazymiu generavimas\n3 - Pazymiu ir vardu generavimas\n4 - Skaityti duomenis is failo\n5 - Testuoti ivesties laika\n6 - Kurti faila ir testuoti jo sukurimo laika\n7 - Skirstyti studentus is failo i vargsiukus ir galvocius\n8 - Baigti darba\nIveskite pasirinkima: ";
         ivesties_tikrinimas(rezimas, tekstas);
         switch(rezimas){
