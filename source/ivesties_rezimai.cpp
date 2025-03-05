@@ -210,8 +210,12 @@ void failu_generavimas(int n){
     cout << "Failas sukurtas: " << filename << "\n";
 }
 
-void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, vector<Stud> &studentai, string failas){
+void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, vector<Stud> &studentai, string failas, std::chrono::duration<double>  &ivesties_suma, std::chrono::duration<double>  &rusiavimo_suma, std::chrono::duration<double>  &isvedimo_suma){
+    auto ivesties_pradzia=std::chrono::high_resolution_clock::now();
     skaitymas_is_failo(laikinas, studentai, failas, true);
+    auto ivesties_pabaiga=std::chrono::high_resolution_clock::now();
+    ivesties_suma+=ivesties_pabaiga-ivesties_pradzia;
+    auto rusiavimo_pradzia=std::chrono::high_resolution_clock::now();
     vector<Stud> vargsiukai, galvociai;
     for (Stud &studentas : studentai){
         if (studentas.galutinis_vid<5){
@@ -221,9 +225,14 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
             galvociai.push_back(studentas);
         }
     }
+    auto rusiavimo_pabaiga=std::chrono::high_resolution_clock::now();
+    rusiavimo_suma+=rusiavimo_pabaiga-rusiavimo_pradzia;
+    auto isvedimo_pradzia=std::chrono::high_resolution_clock::now();
     isvestis_i_faila(vargsiukai, "vargsiukai.txt");
     isvestis_i_faila(galvociai, "galvociai.txt");
     vargsiukai.clear();
     galvociai.clear();
     studentai.clear();
+    auto isvedimo_pabaiga=std::chrono::high_resolution_clock::now();
+    isvedimo_suma+=isvedimo_pabaiga-isvedimo_pradzia;
 }

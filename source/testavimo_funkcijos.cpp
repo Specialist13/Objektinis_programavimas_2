@@ -76,7 +76,7 @@ void failo_kurimo_testavimas (){
 }
 
 void duomenu_apdorojimo_testavimas (){
-    std::chrono::duration<double> laiku_suma{0};
+    std::chrono::duration<double> ivesties_suma{0}, rusiavimo_suma{0}, isvedimo_suma{0};
     string tekstas="Iveskite faila is kurio norite skirstyti: ";
     string failas;
     ivesties_tikrinimas(failas, tekstas);
@@ -84,12 +84,12 @@ void duomenu_apdorojimo_testavimas (){
         for (int i=0; i<5; i++){
             Stud laikinas;
             vector<Stud> studentai;
-            auto pradzia=std::chrono::high_resolution_clock::now();
-            studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas);
-            auto pabaiga=std::chrono::high_resolution_clock::now();
-            laiku_suma+=pabaiga-pradzia;
+            studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas, ivesties_suma, rusiavimo_suma, isvedimo_suma);
         }
-        cout<<"Duomenu apdorojimo laikas: "<<laiku_suma.count()/5<<" s\n";
+        cout<<"Ivesties trukme: "<<ivesties_suma.count()/5<<" s\n";
+        cout<<"Rusiavimo trukme: "<<rusiavimo_suma.count()/5<<" s\n";
+        cout<<"Isvedimo trukme: "<<isvedimo_suma.count()/5<<" s\n";
+        cout<<"Bendra trukme: "<<(ivesties_suma.count()+rusiavimo_suma.count()+isvedimo_suma.count())/5<<" s\n";
     }
     catch (const char* klaida){
         cout<<klaida<<endl;
