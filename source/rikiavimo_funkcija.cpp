@@ -13,7 +13,9 @@ bool raktas_gv(Stud a, Stud b){
 bool raktas_gm(Stud a, Stud b){
     return a.galutinis_med<b.galutinis_med;
 }
-void rikiavimas (vector<Stud> &studentai){
+
+template <typename Container>
+void rikiavimas (Container &studentai){
     string tekstas="1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal galutini pazymi is vidurkio\n4 - Rikiuoti pagal galutini pazymi is medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo buda: ";
     int pasirinkimas;
     ivesties_tikrinimas(pasirinkimas,tekstas);
@@ -55,3 +57,6 @@ void rikiavimas (vector<Stud> &studentai){
         std::reverse(studentai.begin(), studentai.end());
     }
 }
+template void rikiavimas<vector<Stud>>(vector<Stud> &studentai);
+template void rikiavimas<list<Stud>>(list<Stud> &studentai);
+template void rikiavimas<deque<Stud>>(deque<Stud> &studentai);
