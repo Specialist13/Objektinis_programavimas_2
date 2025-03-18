@@ -3,7 +3,8 @@
 #include "../include/skaiciavimo_funkcijos.h"
 #include "../include/ivesties_rezimai.h"
 
-void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas){
+template <typename Container>
+void testinis_skaitymas_is_failo (Stud &laikinas, Container &studentai, string failas){
     std::chrono::duration<double> laiku_suma{0};
     for (int i=0; i<5; i++){
         std::ifstream fd(failas);
@@ -37,8 +38,12 @@ void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, strin
     }
     cout<<"Skaitymo is failo laikas: "<<laiku_suma.count()/5<<" s\n";
 }
+template void testinis_skaitymas_is_failo<vector<Stud>>(Stud &laikinas, vector<Stud> &studentai, string failas);
+template void testinis_skaitymas_is_failo<list<Stud>>(Stud &laikinas, list<Stud> &studentai, string failas);
+template void testinis_skaitymas_is_failo<deque<Stud>>(Stud &laikinas, deque<Stud> &studentai, string failas);
 
-void testavimas(Stud &laikinas, vector<Stud> &studentai){
+template <typename Container>
+void testavimas(Stud &laikinas, Container &studentai){
     string failai[] = {"kursiokai.txt", "studentai10000.txt", "studentai100000.txt", "studentai1000000.txt"};
     string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite faila testavimui: ";
     int pasirinkimas;
@@ -56,6 +61,9 @@ void testavimas(Stud &laikinas, vector<Stud> &studentai){
         testavimas(laikinas, studentai);
     }
 }
+template void testavimas<vector<Stud>>(Stud &laikinas, vector<Stud> &studentai);
+template void testavimas<list<Stud>>(Stud &laikinas, list<Stud> &studentai);
+template void testavimas<deque<Stud>>(Stud &laikinas, deque<Stud> &studentai);
 
 void failo_kurimo_testavimas (){
     std::chrono::duration<double> laiku_suma{0};

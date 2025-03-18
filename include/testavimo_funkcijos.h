@@ -3,8 +3,10 @@
 
 #include "headers_main.h"
 
-void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas);
-void testavimas(Stud &laikinas, vector<Stud> &studentai);
+template <typename Container>
+void testinis_skaitymas_is_failo (Stud &laikinas, Container &studentai, string failas);
+template <typename Container>
+void testavimas(Stud &laikinas, Container &studentai);
 void failo_kurimo_testavimas ();
 void duomenu_apdorojimo_testavimas();
 
