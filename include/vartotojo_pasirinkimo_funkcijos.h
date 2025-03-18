@@ -5,7 +5,9 @@
 
 template <typename Container>
 void rezimo_pasirinkimas (Container &studentai);
-void isvesties_pasirinkimas(vector<Stud> &studentai);
-void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai);
+template <typename Container>
+void isvesties_pasirinkimas(Container &studentai);
+template <typename Container>
+void failo_pasirinkimas(Stud &laikinas, Container &studentai);
 
 #endif
