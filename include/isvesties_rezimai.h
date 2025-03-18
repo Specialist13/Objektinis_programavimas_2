@@ -3,7 +3,10 @@
 
 #include "headers_main.h"
 
-void isvestis_i_konsole (vector<Stud> &studentai);
-void isvestis_i_faila (vector<Stud> &studentai, string failas);
+
+template <typename Container>
+void isvestis_i_konsole (Container &studentai);
+template <typename Container>
+void isvestis_i_faila (Container &studentai, string failas);
 
 #endif
