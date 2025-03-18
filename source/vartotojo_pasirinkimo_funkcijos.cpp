@@ -5,6 +5,51 @@
 #include "../include/rikiavimo_funckija.h"
 
 
+template <typename Container>
+
+void rezimo_pasirinkimas (Container &studentai){
+    int rezimas=0;
+    Stud laikinas;
+    string tekstas;
+    while (rezimas!=8){
+        tekstas="Pasirinkite programos rezima.\n1 - Duomenu ivedimas ranka\n2 - Pazymiu generavimas\n3 - Pazymiu ir vardu generavimas\n4 - Skaityti duomenis is failo\n5 - Testuoti ivesties laika\n6 - Kurti faila ir testuoti jo sukurimo laika\n7 - Skirstyti studentus is failo i vargsiukus ir galvocius\n8 - Baigti darba\nIveskite pasirinkima: ";
+        ivesties_tikrinimas(rezimas, tekstas);
+        switch(rezimas){
+            case 1:
+                ranka(laikinas, studentai);
+                break;
+            case 2:
+                pazymiu_generavimas(laikinas, studentai);
+                break;
+            case 3:
+                visko_generavimas(laikinas, studentai);
+                break;
+            case 4:
+                failo_pasirinkimas(laikinas, studentai);
+                break;
+            case 5:
+                testavimas(laikinas, studentai);
+                break;
+            case 6:
+                failo_kurimo_testavimas();
+                break;
+            case 7:
+                duomenu_apdorojimo_testavimas();
+                break;
+            case 8:
+                cout<<"Viso gero!\n";
+                break;
+            default:
+                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+                break;
+        }      
+    }
+}
+
+template void rezimo_pasirinkimas(vector<Stud> &studentai);
+template void rezimo_pasirinkimas(list<Stud> &studentai);
+template void rezimo_pasirinkimas(deque<Stud> &studentai);
+
 void isvesties_pasirinkimas(vector<Stud> &studentai){
     rikiavimas(studentai);
     string tekstas="1 - Isvesti rezultatus i konsole\n2 - Isvesti rezultatus i faila\nPasirinkite isvedimo buda: ";

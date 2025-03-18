@@ -1,7 +1,7 @@
 #ifndef IVESTIES_REZIMAI_H
 #define IVESTIES_REZIMAI_H
 
-#include "headers_vector.h"
+#include "headers_main.h"
 
 void ranka (Stud &laikinas, vector<Stud> &studentai);
 void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai);
