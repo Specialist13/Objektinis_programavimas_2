@@ -5,7 +5,8 @@
 #include "../include/isvesties_rezimai.h"
 #include "../include/rikiavimo_funckija.h"
 
-void ranka (Stud &laikinas, vector<Stud> &studentai){
+template <typename Container>
+void ranka (Stud &laikinas, Container &studentai){
     string tekstas;
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
@@ -52,7 +53,12 @@ void ranka (Stud &laikinas, vector<Stud> &studentai){
     laikinas.vardas.clear();
 }
 
-void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
+template void ranka<vector<Stud>>(Stud&, vector<Stud>&);
+template void ranka<list<Stud>>(Stud&, list<Stud>&);
+template void ranka<deque<Stud>>(Stud&, deque<Stud>&);
+
+template <typename Container>
+void pazymiu_generavimas (Stud &laikinas, Container &studentai){
     srand(time(NULL));
     string tekstas;
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
@@ -83,7 +89,12 @@ void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
     laikinas.vardas.clear();
 }
 
-void visko_generavimas (Stud &laikinas, vector<Stud> &studentai){
+template void pazymiu_generavimas<vector<Stud>>(Stud&, vector<Stud>&);
+template void pazymiu_generavimas<list<Stud>>(Stud&, list<Stud>&);
+template void pazymiu_generavimas<deque<Stud>>(Stud&, deque<Stud>&);
+
+template <typename Container>
+void visko_generavimas (Stud &laikinas, Container &studentai){
     srand(time(NULL));
 
     vector<string> vyriskiVardai = {
@@ -144,8 +155,12 @@ void visko_generavimas (Stud &laikinas, vector<Stud> &studentai){
     studentai.clear();
     laikinas.vardas.clear();
 }
+template void visko_generavimas<vector<Stud>>(Stud&, vector<Stud>&);
+template void visko_generavimas<list<Stud>>(Stud&, list<Stud>&);
+template void visko_generavimas<deque<Stud>>(Stud&, deque<Stud>&);
 
-void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas, bool testavimas){
+template <typename Container>
+void skaitymas_is_failo (Stud &laikinas, Container &studentai, string failas, bool testavimas){
     std::ifstream fd(failas);
     if (fd.fail()){
         throw std::runtime_error("Failas nerastas.");
@@ -175,6 +190,9 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas,
         laikinas.vardas.clear();
     }    
 }
+template void skaitymas_is_failo<vector<Stud>>(Stud&, vector<Stud>&, string, bool);
+template void skaitymas_is_failo<list<Stud>>(Stud&, list<Stud>&, string, bool);
+template void skaitymas_is_failo<deque<Stud>>(Stud&, deque<Stud>&, string, bool);
 
 void failu_generavimas(int n){
     string filename = "studentai" + std::to_string(n) + ".txt";
@@ -211,7 +229,8 @@ void failu_generavimas(int n){
     cout << "Failas sukurtas: " << filename << "\n";
 }
 
-void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, vector<Stud> &studentai, string failas, std::chrono::duration<double>  &ivesties_suma, std::chrono::duration<double>  &rusiavimo_suma, std::chrono::duration<double>  &isvedimo_suma, int pasirinkimas1, int pasirinkimas2, int pasirinkimas3, int pasirinkimas4){
+template <typename Container>
+void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, Container &studentai, string failas, std::chrono::duration<double>  &ivesties_suma, std::chrono::duration<double>  &rusiavimo_suma, std::chrono::duration<double>  &isvedimo_suma, int pasirinkimas1, int pasirinkimas2, int pasirinkimas3, int pasirinkimas4){
     auto ivesties_pradzia=std::chrono::high_resolution_clock::now();
     skaitymas_is_failo(laikinas, studentai, failas, true);
     auto ivesties_pabaiga=std::chrono::high_resolution_clock::now();
@@ -293,3 +312,6 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
     auto isvedimo_pabaiga=std::chrono::high_resolution_clock::now();
     isvedimo_suma+=isvedimo_pabaiga-isvedimo_pradzia;
 }
+template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<vector<Stud>>(Stud&, vector<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&, int, int, int, int);
+template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<list<Stud>>(Stud&, list<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&, int, int, int, int);
+template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<deque<Stud>>(Stud&, deque<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&, int, int, int, int);
