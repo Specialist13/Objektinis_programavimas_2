@@ -17,4 +17,6 @@ SSD: SKHynix_HFS001TEJ9X115N
 ![image](https://github.com/user-attachments/assets/11715b4d-bd7f-4186-95b7-10fa77586269)
 </br>
 **Deque testavimas**
+M
+</br>
 ![image](https://github.com/user-attachments/assets/a2461b7f-4de6-4527-81d6-5e12dcf0c8c0)
