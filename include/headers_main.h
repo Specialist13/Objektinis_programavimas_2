@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <chrono>
+#include <type_traits>
 
 using std::cin;
 using std::cout;

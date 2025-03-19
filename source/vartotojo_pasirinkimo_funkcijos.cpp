@@ -3,6 +3,7 @@
 #include "../include/ivesties_rezimai.h"
 #include "../include/ivesties_tikrinimas.h"
 #include "../include/rikiavimo_funckija.h"
+#include "../include/testavimo_funkcijos.h"
 
 
 template <typename Container>

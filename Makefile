@@ -1,2 +1,2 @@
 all:
-	g++ -O3 ./source/*.cpp -o program.exe
+	g++ -O3 -std=c++17 ./source/*.cpp -o program.exe
