@@ -6,7 +6,7 @@
 template <typename Container>
 void strategija_1(Container &studentai, Container &vargsiukai, Container &galvociai);
 template <typename Container>
-void strategija_2(Container &studentai, Container &vargsiukai);
+void strategija_2(Container &studentai, Container &galvociai);
 template <typename Container>
 void ranka (Stud &laikinas, Container &studentai);
 template <typename Container>

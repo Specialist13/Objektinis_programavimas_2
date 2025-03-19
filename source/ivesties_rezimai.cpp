@@ -23,16 +23,10 @@ void strategija_1(Container &studentai, Container &vargsiukai, Container &galvoc
 }
 
 template <typename Container>
-void strategija_2(Container &studentai, Container &vargsiukai){
-    auto it=studentai.begin();
-    while (it!=studentai.end()){
-        if(it->galutinis_vid<5){
-            vargsiukai.push_back(*it);
-            it=studentai.erase(it);
-        }
-        else {
-            ++it;
-        }
+void strategija_2(Container &studentai, Container &galvociai){
+    while (!studentai.empty() && studentai.back().galutinis_vid >= 5) {
+        galvociai.push_back(std::move(studentai.back()));
+        studentai.pop_back();
     }
 }
 
@@ -397,7 +391,7 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
         strategija_1(studentai, vargsiukai, galvociai);
     }
     else if (strategija==2){
-        strategija_2(studentai, vargsiukai);
+        strategija_2(studentai, galvociai);
     }
     else if (strategija==3){
         strategija_1(studentai, vargsiukai, galvociai);
