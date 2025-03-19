@@ -230,30 +230,21 @@ void failu_generavimas(int n){
 }
 
 template <typename Container>
-void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, Container &studentai, string failas, std::chrono::duration<double>  &ivesties_suma, std::chrono::duration<double>  &rusiavimo_suma, std::chrono::duration<double>  &isvedimo_suma, int pasirinkimas1, int pasirinkimas2, int pasirinkimas3, int pasirinkimas4){
+void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, Container &studentai, string failas, std::chrono::duration<double>  &ivesties_suma, std::chrono::duration<double>  &rusiavimo_suma, std::chrono::duration<double>  &skirstymo_suma/*, int pasirinkimas1, int pasirinkimas2, int pasirinkimas3, int pasirinkimas4*/){
     auto ivesties_pradzia=std::chrono::high_resolution_clock::now();
     skaitymas_is_failo(laikinas, studentai, failas, true);
     auto ivesties_pabaiga=std::chrono::high_resolution_clock::now();
     ivesties_suma+=ivesties_pabaiga-ivesties_pradzia;
     auto rusiavimo_pradzia=std::chrono::high_resolution_clock::now();
-    Container vargsiukai, galvociai;
-    for (Stud &studentas : studentai){
-        if (studentas.galutinis_vid<5){
-            vargsiukai.push_back(studentas);
-        }
-        else {
-            galvociai.push_back(studentas);
-        }
+    
+    if constexpr (std::is_same_v<Container, std::list<Stud>>){
+        studentai.sort(raktas_gv);
+    }
+    else {
+        std::sort(studentai.begin(), studentai.end(), raktas_gv);
     }
     
-    
-    if constexpr (std::is_same_v<Container, std::vector<Stud>>){
-        vargsiukai.shrink_to_fit();
-        galvociai.shrink_to_fit();
-        studentai.clear();
-    }
-    
-    if (pasirinkimas1==5){
+    /*if (pasirinkimas1==5){
         return;
     }
 
@@ -365,18 +356,36 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
         else {
             std::reverse(galvociai.begin(), galvociai.end());
         }
-    }
+    }*/
+
     auto rusiavimo_pabaiga=std::chrono::high_resolution_clock::now();
     rusiavimo_suma+=rusiavimo_pabaiga-rusiavimo_pradzia;
-    auto isvedimo_pradzia=std::chrono::high_resolution_clock::now();
+    auto skirstymo_pradzia=std::chrono::high_resolution_clock::now();
+    Container vargsiukai, galvociai;
+    for (Stud &studentas : studentai){
+        if (studentas.galutinis_vid<5){
+            vargsiukai.push_back(studentas);
+        }
+        else {
+            galvociai.push_back(studentas);
+        }
+    }
+    
+    
+    if constexpr (std::is_same_v<Container, std::vector<Stud>>){
+        vargsiukai.shrink_to_fit();
+        galvociai.shrink_to_fit();
+    }
+    
+    
+    auto skirstymo_pabaiga=std::chrono::high_resolution_clock::now();
     isvestis_i_faila(vargsiukai, "vargsiukai.txt");
     isvestis_i_faila(galvociai, "galvociai.txt");
+    skirstymo_suma+=skirstymo_pabaiga-skirstymo_pradzia;
     vargsiukai.clear();
     galvociai.clear();
     studentai.clear();
-    auto isvedimo_pabaiga=std::chrono::high_resolution_clock::now();
-    isvedimo_suma+=isvedimo_pabaiga-isvedimo_pradzia;
 }
-template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<vector<Stud>>(Stud&, vector<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&, int, int, int, int);
-template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<list<Stud>>(Stud&, list<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&, int, int, int, int);
-template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<deque<Stud>>(Stud&, deque<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&, int, int, int, int);
+template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<vector<Stud>>(Stud&, vector<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&/*, int, int, int, int*/);
+template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<list<Stud>>(Stud&, list<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&/*, int, int, int, int*/);
+template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<deque<Stud>>(Stud&, deque<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&/*, int, int, int, int*/);
