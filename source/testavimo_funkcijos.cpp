@@ -91,6 +91,13 @@ void duomenu_apdorojimo_testavimas (){
     cout<<"Dabar rinkites vagsiuku rikiavimo buda:\n";
     */
     vector<string> failai = {"studentai1000.txt", "studentai10000.txt", "studentai100000.txt", "studentai1000000.txt", "studentai10000000.txt"};
+    int strategija=0;
+    string tekstas="Pasirinkite strategija (1, 2, 3): ";
+    ivesties_tikrinimas(strategija, tekstas);
+    while (strategija<1 || strategija>3){
+        cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+        ivesties_tikrinimas(strategija, tekstas);
+    }
     /*string tekstas="1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal galutini pazymi is vidurkio\n4 - Rikiuoti pagal galutini pazymi is medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo buda: ";
     int pasirinkimas1;
     ivesties_tikrinimas(pasirinkimas1, tekstas);
@@ -125,7 +132,7 @@ void duomenu_apdorojimo_testavimas (){
             for (int i=0; i<5; i++){
                 Stud laikinas;
                 vector<Stud> studentai;
-                studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas, ivesties_suma, rusiavimo_suma, skirstymo_suma/*, pasirinkimas1, pasirinkimas2, pasirinkimas3, pasirinkimas4*/);
+                studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas, ivesties_suma, rusiavimo_suma, skirstymo_suma, strategija/*, pasirinkimas1, pasirinkimas2, pasirinkimas3, pasirinkimas4*/);
             }
             cout<<"Failas: "<<failas<<endl;
             cout<<"Ivesties trukme: "<<ivesties_suma.count()/5<<" s\n";
@@ -139,3 +146,5 @@ void duomenu_apdorojimo_testavimas (){
         }
     }
 }
+
+
