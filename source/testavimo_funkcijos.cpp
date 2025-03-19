@@ -85,11 +85,13 @@ void failo_kurimo_testavimas (){
 
 void duomenu_apdorojimo_testavimas (){
     std::chrono::duration<double> ivesties_suma{0}, rusiavimo_suma{0}, isvedimo_suma{0};
-    string tekstas="Iveskite faila is kurio norite skirstyti: ";
+    /*string tekstas="Iveskite faila is kurio norite skirstyti: ";
     string failas;
     ivesties_tikrinimas(failas, tekstas);
     cout<<"Dabar rinkites vagsiuku rikiavimo buda:\n";
-    tekstas="1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal galutini pazymi is vidurkio\n4 - Rikiuoti pagal galutini pazymi is medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo buda: ";
+    */
+    vector<string> failai = {"studentai1000.txt", "studentai10000.txt", "studentai100000.txt", "studentai1000000.txt", "studentai10000000.txt"};
+    string tekstas="1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal galutini pazymi is vidurkio\n4 - Rikiuoti pagal galutini pazymi is medianos\n5 - Nerikiuoti\nPasirinkite rikiavimo buda: ";
     int pasirinkimas1;
     ivesties_tikrinimas(pasirinkimas1, tekstas);
     while (pasirinkimas1<1 || pasirinkimas1>5){
@@ -118,19 +120,22 @@ void duomenu_apdorojimo_testavimas (){
         cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         ivesties_tikrinimas(pasirinkimas4, tekstas);
     }
-    try {
-        for (int i=0; i<5; i++){
-            Stud laikinas;
-            vector<Stud> studentai;
-            studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas, ivesties_suma, rusiavimo_suma, isvedimo_suma, pasirinkimas1, pasirinkimas2, pasirinkimas3, pasirinkimas4);
+    for (auto failas:failai){
+        try {
+            for (int i=0; i<5; i++){
+                Stud laikinas;
+                vector<Stud> studentai;
+                studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas, ivesties_suma, rusiavimo_suma, isvedimo_suma, pasirinkimas1, pasirinkimas2, pasirinkimas3, pasirinkimas4);
+            }
+            cout<<"Failas: "<<failas<<endl;
+            cout<<"Ivesties trukme: "<<ivesties_suma.count()/5<<" s\n";
+            cout<<"Rusiavimo trukme: "<<rusiavimo_suma.count()/5<<" s\n";
+            cout<<"Isvedimo trukme: "<<isvedimo_suma.count()/5<<" s\n";
+            cout<<"Bendra trukme: "<<(ivesties_suma.count()+rusiavimo_suma.count()+isvedimo_suma.count())/5<<" s\n";
         }
-        cout<<"Ivesties trukme: "<<ivesties_suma.count()/5<<" s\n";
-        cout<<"Rusiavimo trukme: "<<rusiavimo_suma.count()/5<<" s\n";
-        cout<<"Isvedimo trukme: "<<isvedimo_suma.count()/5<<" s\n";
-        cout<<"Bendra trukme: "<<(ivesties_suma.count()+rusiavimo_suma.count()+isvedimo_suma.count())/5<<" s\n";
-    }
-    catch (std::runtime_error klaida){
-        std::cerr<<klaida.what()<<endl;
-        duomenu_apdorojimo_testavimas();
+        catch (std::runtime_error klaida){
+            std::cerr<<klaida.what()<<endl;
+            duomenu_apdorojimo_testavimas();
+        }
     }
 }
