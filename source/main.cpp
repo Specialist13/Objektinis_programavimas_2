@@ -9,14 +9,19 @@ int main(){
     cout<<"Sveiki!\n";
     int rezimas=0;
     Stud laikinas;
-    cout<<"Pasirinkite konteineri. \n1 - Vector\n2 - List\n3 - Deque\n";
+    cout<<"Pasirinkite konteineri. \n1 - Vector\n2 - List\n3 - Deque\n4 - Baigti darba\n";
     int konteineris=0;
     string tekstas="Pasirinkite konteineri: ";
-    while (konteineris!=1 && konteineris!=2 && konteineris!=3){
+    while (konteineris!=1 && konteineris!=2 && konteineris!=3 && konteineris!=4){
         ivesties_tikrinimas(konteineris, tekstas);
-        if (konteineris!=1 && konteineris!=2 && konteineris!=3){
+        if (konteineris!=1 && konteineris!=2 && konteineris!=3 && konteineris!=4){
             cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         }
+    }
+    
+    if (konteineris==4){
+        cout<<"Viso gero!\n";
+        return 0;
     }
     if (konteineris==1){
         vector<Stud> studentai;
