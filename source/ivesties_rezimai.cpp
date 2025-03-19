@@ -236,7 +236,7 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
     auto ivesties_pabaiga=std::chrono::high_resolution_clock::now();
     ivesties_suma+=ivesties_pabaiga-ivesties_pradzia;
     auto rusiavimo_pradzia=std::chrono::high_resolution_clock::now();
-    vector<Stud> vargsiukai, galvociai;
+    Container vargsiukai, galvociai;
     for (Stud &studentas : studentai){
         if (studentas.galutinis_vid<5){
             vargsiukai.push_back(studentas);
@@ -246,60 +246,125 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
         }
     }
     
-    switch (pasirinkimas1){
-        case 1:
-            std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_v);
-            break;
-        case 2:
-            std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_p);
-            break;
-        case 3:
-            std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_gv);
-            break;
-        case 4:
-            std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_gm);
-            break;
-        case 5:
-            break;
-        default:
-            cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-            return;
+    
+    if constexpr (std::is_same_v<Container, std::vector<Stud>>){
+        vargsiukai.shrink_to_fit();
+        galvociai.shrink_to_fit();
+        studentai.clear();
     }
+    
     if (pasirinkimas1==5){
         return;
     }
+
+    if constexpr (std::is_same_v<Container, std::list<Stud>>){
+        switch (pasirinkimas1){
+            case 1:
+                vargsiukai.sort(raktas_v);
+                break;
+            case 2:
+                vargsiukai.sort(raktas_p);
+                break;
+            case 3:
+                vargsiukai.sort(raktas_gv);
+                break;
+            case 4:
+                vargsiukai.sort(raktas_gm);
+                break;
+            case 5:
+                break;
+            default:
+                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+                return;
+        }
+    }
+    else {
+        switch (pasirinkimas1){
+            case 1:
+                std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_v);
+                break;
+            case 2:
+                std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_p);
+                break;
+            case 3:
+                std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_gv);
+                break;
+            case 4:
+                std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_gm);
+                break;
+            case 5:
+                break;
+            default:
+                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+                return;
+        }
+    }
     
     if (pasirinkimas2==2){
-        std::reverse(vargsiukai.begin(), vargsiukai.end());
+        if constexpr (std::is_same_v<Container, std::list<Stud>>){
+            studentai.reverse();
+        }
+        else {
+            std::reverse(vargsiukai.begin(), vargsiukai.end());
+        }
     }
 
-    
 
-    switch (pasirinkimas3){
-        case 1:
-            std::sort(galvociai.begin(), galvociai.end(), raktas_v);
-            break;
-        case 2:
-            std::sort(galvociai.begin(), galvociai.end(), raktas_p);
-            break;
-        case 3:
-            std::sort(galvociai.begin(), galvociai.end(), raktas_gv);
-            break;
-        case 4:
-            std::sort(galvociai.begin(), galvociai.end(), raktas_gm);
-            break;
-        case 5:
-            break;
-        default:
-            cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-            return;
-    }
     if (pasirinkimas3==5){
         return;
     }
+
+
+    if constexpr (std::is_same_v<Container, std::list<Stud>>){
+        switch (pasirinkimas3){
+            case 1:
+                galvociai.sort(raktas_v);
+                break;
+            case 2:
+                galvociai.sort(raktas_p);
+                break;
+            case 3:
+                galvociai.sort(raktas_gv);
+                break;
+            case 4:
+                galvociai.sort(raktas_gm);
+                break;
+            case 5:
+                break;
+            default:
+                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+                return;
+        }
+    }
+    else {
+        switch (pasirinkimas3){
+            case 1:
+                std::sort(galvociai.begin(), galvociai.end(), raktas_v);
+                break;
+            case 2:
+                std::sort(galvociai.begin(), galvociai.end(), raktas_p);
+                break;
+            case 3:
+                std::sort(galvociai.begin(), galvociai.end(), raktas_gv);
+                break;
+            case 4:
+                std::sort(galvociai.begin(), galvociai.end(), raktas_gm);
+                break;
+            case 5:
+                break;
+            default:
+                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
+                return;
+        }
+    }
     
     if (pasirinkimas4==2){
-        std::reverse(galvociai.begin(), galvociai.end());
+        if constexpr (std::is_same_v<Container, std::list<Stud>>){
+            galvociai.reverse();
+        }
+        else {
+            std::reverse(galvociai.begin(), galvociai.end());
+        }
     }
     auto rusiavimo_pabaiga=std::chrono::high_resolution_clock::now();
     rusiavimo_suma+=rusiavimo_pabaiga-rusiavimo_pradzia;
