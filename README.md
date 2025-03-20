@@ -28,3 +28,8 @@ SSD: SKHynix_HFS001TEJ9X115N
 **Vector testavimas**
 </br>
 ![image](https://github.com/user-attachments/assets/8c824515-7748-4838-85ea-2201df3a00fb)
+</br>
+**List testavimas**
+</br>
+![image](https://github.com/user-attachments/assets/6cf44ee7-a67d-4a0f-9357-9d34e80754df)
+
