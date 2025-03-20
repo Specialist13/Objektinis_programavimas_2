@@ -21,6 +21,9 @@ void strategija_1(Container &studentai, Container &vargsiukai, Container &galvoc
         galvociai.shrink_to_fit();
     }
 }
+template void strategija_1<vector<Stud>>(vector<Stud>&, vector<Stud>&, vector<Stud>&);
+template void strategija_1<list<Stud>>(list<Stud>&, list<Stud>&, list<Stud>&);
+template void strategija_1<deque<Stud>>(deque<Stud>&, deque<Stud>&, deque<Stud>&);
 
 template <typename Container>
 void strategija_2(Container &studentai, Container &galvociai){
@@ -29,6 +32,28 @@ void strategija_2(Container &studentai, Container &galvociai){
         studentai.pop_back();
     }
 }
+template void strategija_2<vector<Stud>>(vector<Stud>&, vector<Stud>&);
+template void strategija_2<list<Stud>>(list<Stud>&, list<Stud>&);
+template void strategija_2<deque<Stud>>(deque<Stud>&, deque<Stud>&);
+
+template <typename Container>
+void strategija_3(Container &studentai, Container &vargsiukai, Container &galvociai) {
+    auto it = std::find_if(studentai.begin(), studentai.end(), [](const Stud &s) {
+        return s.galutinis_vid >= 5;
+    });
+
+    std::copy(studentai.begin(), it, std::back_inserter(vargsiukai));
+    std::copy(it, studentai.end(), std::back_inserter(galvociai));
+
+    if constexpr (std::is_same_v<Container, std::vector<Stud>>) {
+        vargsiukai.shrink_to_fit();
+        galvociai.shrink_to_fit();
+    }
+}
+template void strategija_3<vector<Stud>>(vector<Stud>&, vector<Stud>&, vector<Stud>&);
+template void strategija_3<list<Stud>>(list<Stud>&, list<Stud>&, list<Stud>&);
+template void strategija_3<deque<Stud>>(deque<Stud>&, deque<Stud>&, deque<Stud>&);
+
 
 template <typename Container>
 void ranka (Stud &laikinas, Container &studentai){
@@ -394,7 +419,7 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
         strategija_2(studentai, galvociai);
     }
     else if (strategija==3){
-        strategija_1(studentai, vargsiukai, galvociai);
+        strategija_3(studentai, vargsiukai, galvociai);
     }
     
     

@@ -8,6 +8,8 @@ void strategija_1(Container &studentai, Container &vargsiukai, Container &galvoc
 template <typename Container>
 void strategija_2(Container &studentai, Container &galvociai);
 template <typename Container>
+void strategija_3(Container &studentai, Container &vargsiukai, Container &galvociai);
+template <typename Container>
 void ranka (Stud &laikinas, Container &studentai);
 template <typename Container>
 void pazymiu_generavimas (Stud &laikinas, Container &studentai);
