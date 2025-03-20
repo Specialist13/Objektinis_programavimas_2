@@ -399,8 +399,14 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
     
     
     auto skirstymo_pabaiga=std::chrono::high_resolution_clock::now();
-    isvestis_i_faila(vargsiukai, "vargsiukai.txt");
-    isvestis_i_faila(galvociai, "galvociai.txt");
+    if (strategija==1 || strategija==3){
+        isvestis_i_faila(vargsiukai, "vargsiukai.txt");
+        isvestis_i_faila(galvociai, "galvociai.txt");
+    }
+    else if (strategija==2){
+        isvestis_i_faila(galvociai, "galvociai.txt");
+        isvestis_i_faila(studentai, "vargsiukai.txt");
+    }
     skirstymo_suma+=skirstymo_pabaiga-skirstymo_pradzia;
     vargsiukai.clear();
     galvociai.clear();
