@@ -5,7 +5,7 @@
 #include "skaiciavimo_funkcijos.h"
 
 class Stud {
-    private:
+private:
     string vardas;
     string pavarde;
     vector<int> pazymiai;
@@ -16,8 +16,7 @@ public:
     Stud() : egzaminas(0) {}
     Stud(std::istream& is);
     inline string getVardas() const { return vardas; }
-    inline std::string pavarde() const { return pavarde; }
-    double galBalas(std::function<double(std::vector<int>&, int&)> func = mediana) const; 
+    inline std::string getPavarde() const { return pavarde; }
     std::istream& readStudent(std::istream&); 
 };
 
