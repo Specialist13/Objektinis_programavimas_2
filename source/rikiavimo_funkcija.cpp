@@ -2,16 +2,16 @@
 #include "../include/ivesties_tikrinimas.h"
 
 bool raktas_v(Stud a, Stud b){
-    return a.vardas<b.vardas;
+    return a.getVardas()<b.getVardas();
 }
 bool raktas_p(Stud a, Stud b){
-    return a.pavarde<b.pavarde;
+    return a.getPavarde()<b.getPavarde();
 }
 bool raktas_gv(Stud a, Stud b){
-    return a.galutinis_vid<b.galutinis_vid;
+    return a.getGalutinisVid()<b.getGalutinisVid();
 }
 bool raktas_gm(Stud a, Stud b){
-    return a.galutinis_med<b.galutinis_med;
+    return a.getGalutinisMed()<b.getGalutinisMed();
 }
 
 void rikiavimas (vector<Stud> &studentai){
