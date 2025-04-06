@@ -17,6 +17,8 @@ public:
     Stud(std::istream& is);
     inline string getVardas() const { return vardas; }
     inline std::string getPavarde() const { return pavarde; }
+    inline double getGalutinisVid() const { return galutinis_vid; }
+    inline double getGalutinisMed() const { return galutinis_med; }
     std::istream& readStudent(std::istream&); 
 };
 

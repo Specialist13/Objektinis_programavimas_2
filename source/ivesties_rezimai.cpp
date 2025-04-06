@@ -7,7 +7,7 @@
 
 void strategija_1(vector<Stud> &studentai, vector<Stud> &vargsiukai, vector<Stud> &galvociai){
     for (Stud &studentas : studentai){
-        if (studentas.galutinis_vid<5){
+        if (studentas.getGalutinisVid()<5){
             vargsiukai.push_back(studentas);
         }
         else {

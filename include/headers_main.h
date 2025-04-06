@@ -6,8 +6,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <list>
-#include <deque>
 #include <iomanip>
 #include <algorithm>
 #include <chrono>
@@ -19,7 +17,5 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::vector;
-using std::list;
-using std::deque;
 
 #endif
