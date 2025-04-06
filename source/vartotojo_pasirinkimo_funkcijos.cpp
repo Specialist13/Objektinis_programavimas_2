@@ -5,10 +5,7 @@
 #include "../include/rikiavimo_funckija.h"
 #include "../include/testavimo_funkcijos.h"
 
-
-template <typename Container>
-
-void rezimo_pasirinkimas (Container &studentai){
+void rezimo_pasirinkimas (vector<Stud> &studentai){
     int rezimas=0;
     Stud laikinas;
     string tekstas;
@@ -47,12 +44,7 @@ void rezimo_pasirinkimas (Container &studentai){
     }
 }
 
-template void rezimo_pasirinkimas(vector<Stud> &studentai);
-template void rezimo_pasirinkimas(list<Stud> &studentai);
-template void rezimo_pasirinkimas(deque<Stud> &studentai);
-
-template <typename Container>
-void isvesties_pasirinkimas(Container &studentai){
+void isvesties_pasirinkimas(vector<Stud> &studentai){
     rikiavimas(studentai);
     string tekstas="1 - Isvesti rezultatus i konsole\n2 - Isvesti rezultatus i faila\nPasirinkite isvedimo buda: ";
     int pasirinkimas;
@@ -73,12 +65,8 @@ void isvesties_pasirinkimas(Container &studentai){
             return;
     }
 }
-template void isvesties_pasirinkimas<vector<Stud>>(vector<Stud> &studentai);
-template void isvesties_pasirinkimas<list<Stud>>(list<Stud> &studentai);
-template void isvesties_pasirinkimas<deque<Stud>>(deque<Stud> &studentai);
 
-template <typename Container>
-void failo_pasirinkimas(Stud &laikinas, Container &studentai){
+void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
     string failai[] = {"kursiokai.txt", "studentai10000.txt", "studentai100000.txt", "studentai1000000.txt"};
     string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite faila: ";
     int pasirinkimas;
@@ -95,6 +83,3 @@ void failo_pasirinkimas(Stud &laikinas, Container &studentai){
         failo_pasirinkimas(laikinas, studentai);
     }
 }
-template void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai);
-template void failo_pasirinkimas(Stud &laikinas, list<Stud> &studentai);
-template void failo_pasirinkimas(Stud &laikinas, deque<Stud> &studentai);

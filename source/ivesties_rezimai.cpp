@@ -5,8 +5,7 @@
 #include "../include/isvesties_rezimai.h"
 #include "../include/rikiavimo_funckija.h"
 
-template <typename Container>
-void strategija_1(Container &studentai, Container &vargsiukai, Container &galvociai){
+void strategija_1(vector<Stud> &studentai, vector<Stud> &vargsiukai, vector<Stud> &galvociai){
     for (Stud &studentas : studentai){
         if (studentas.galutinis_vid<5){
             vargsiukai.push_back(studentas);
@@ -16,47 +15,11 @@ void strategija_1(Container &studentai, Container &vargsiukai, Container &galvoc
         }
     }
     
-    if constexpr (std::is_same_v<Container, std::vector<Stud>>){
-        vargsiukai.shrink_to_fit();
-        galvociai.shrink_to_fit();
-    }
+    vargsiukai.shrink_to_fit();
+    galvociai.shrink_to_fit();
 }
-template void strategija_1<vector<Stud>>(vector<Stud>&, vector<Stud>&, vector<Stud>&);
-template void strategija_1<list<Stud>>(list<Stud>&, list<Stud>&, list<Stud>&);
-template void strategija_1<deque<Stud>>(deque<Stud>&, deque<Stud>&, deque<Stud>&);
 
-template <typename Container>
-void strategija_2(Container &studentai, Container &galvociai){
-    while (!studentai.empty() && studentai.back().galutinis_vid >= 5) {
-        galvociai.push_back(std::move(studentai.back()));
-        studentai.pop_back();
-    }
-}
-template void strategija_2<vector<Stud>>(vector<Stud>&, vector<Stud>&);
-template void strategija_2<list<Stud>>(list<Stud>&, list<Stud>&);
-template void strategija_2<deque<Stud>>(deque<Stud>&, deque<Stud>&);
-
-template <typename Container>
-void strategija_3(Container &studentai, Container &vargsiukai, Container &galvociai) {
-    auto it = std::find_if(studentai.begin(), studentai.end(), [](const Stud &s) {
-        return s.galutinis_vid >= 5;
-    });
-
-    std::copy(studentai.begin(), it, std::back_inserter(vargsiukai));
-    std::copy(it, studentai.end(), std::back_inserter(galvociai));
-
-    if constexpr (std::is_same_v<Container, std::vector<Stud>>) {
-        vargsiukai.shrink_to_fit();
-        galvociai.shrink_to_fit();
-    }
-}
-template void strategija_3<vector<Stud>>(vector<Stud>&, vector<Stud>&, vector<Stud>&);
-template void strategija_3<list<Stud>>(list<Stud>&, list<Stud>&, list<Stud>&);
-template void strategija_3<deque<Stud>>(deque<Stud>&, deque<Stud>&, deque<Stud>&);
-
-
-template <typename Container>
-void ranka (Stud &laikinas, Container &studentai){
+void ranka (Stud &laikinas, vector<Stud> &studentai){
     string tekstas;
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (laikinas.vardas!="n"){
@@ -103,12 +66,7 @@ void ranka (Stud &laikinas, Container &studentai){
     laikinas.vardas.clear();
 }
 
-template void ranka<vector<Stud>>(Stud&, vector<Stud>&);
-template void ranka<list<Stud>>(Stud&, list<Stud>&);
-template void ranka<deque<Stud>>(Stud&, deque<Stud>&);
-
-template <typename Container>
-void pazymiu_generavimas (Stud &laikinas, Container &studentai){
+void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
     srand(time(NULL));
     string tekstas;
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
@@ -139,12 +97,7 @@ void pazymiu_generavimas (Stud &laikinas, Container &studentai){
     laikinas.vardas.clear();
 }
 
-template void pazymiu_generavimas<vector<Stud>>(Stud&, vector<Stud>&);
-template void pazymiu_generavimas<list<Stud>>(Stud&, list<Stud>&);
-template void pazymiu_generavimas<deque<Stud>>(Stud&, deque<Stud>&);
-
-template <typename Container>
-void visko_generavimas (Stud &laikinas, Container &studentai){
+void visko_generavimas (Stud &laikinas, vector<Stud> &studentai){
     srand(time(NULL));
 
     vector<string> vyriskiVardai = {
@@ -205,12 +158,8 @@ void visko_generavimas (Stud &laikinas, Container &studentai){
     studentai.clear();
     laikinas.vardas.clear();
 }
-template void visko_generavimas<vector<Stud>>(Stud&, vector<Stud>&);
-template void visko_generavimas<list<Stud>>(Stud&, list<Stud>&);
-template void visko_generavimas<deque<Stud>>(Stud&, deque<Stud>&);
 
-template <typename Container>
-void skaitymas_is_failo (Stud &laikinas, Container &studentai, string failas, bool testavimas){
+void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas, bool testavimas){
     std::ifstream fd(failas);
     if (fd.fail()){
         throw std::runtime_error("Failas nerastas.");
@@ -240,9 +189,6 @@ void skaitymas_is_failo (Stud &laikinas, Container &studentai, string failas, bo
         laikinas.vardas.clear();
     }    
 }
-template void skaitymas_is_failo<vector<Stud>>(Stud&, vector<Stud>&, string, bool);
-template void skaitymas_is_failo<list<Stud>>(Stud&, list<Stud>&, string, bool);
-template void skaitymas_is_failo<deque<Stud>>(Stud&, deque<Stud>&, string, bool);
 
 void failu_generavimas(int n){
     string filename = "studentai" + std::to_string(n) + ".txt";
@@ -279,20 +225,14 @@ void failu_generavimas(int n){
     cout << "Failas sukurtas: " << filename << "\n";
 }
 
-template <typename Container>
-void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, Container &studentai, string failas, std::chrono::duration<double>  &ivesties_suma, std::chrono::duration<double>  &rusiavimo_suma, std::chrono::duration<double>  &skirstymo_suma, int strategija/*, int pasirinkimas1, int pasirinkimas2, int pasirinkimas3, int pasirinkimas4*/){
+void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, vector<Stud> &studentai, string failas, std::chrono::duration<double>  &ivesties_suma, std::chrono::duration<double>  &rusiavimo_suma, std::chrono::duration<double>  &skirstymo_suma, int strategija/*, int pasirinkimas1, int pasirinkimas2, int pasirinkimas3, int pasirinkimas4*/){
     auto ivesties_pradzia=std::chrono::high_resolution_clock::now();
     skaitymas_is_failo(laikinas, studentai, failas, true);
     auto ivesties_pabaiga=std::chrono::high_resolution_clock::now();
     ivesties_suma+=ivesties_pabaiga-ivesties_pradzia;
     auto rusiavimo_pradzia=std::chrono::high_resolution_clock::now();
     
-    if constexpr (std::is_same_v<Container, std::list<Stud>>){
-        studentai.sort(raktas_gv);
-    }
-    else {
-        std::sort(studentai.begin(), studentai.end(), raktas_gv);
-    }
+    std::sort(studentai.begin(), studentai.end(), raktas_gv);
     
     /*if (pasirinkimas1==5){
         return;
@@ -411,7 +351,7 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
     auto rusiavimo_pabaiga=std::chrono::high_resolution_clock::now();
     rusiavimo_suma+=rusiavimo_pabaiga-rusiavimo_pradzia;
     auto skirstymo_pradzia=std::chrono::high_resolution_clock::now();
-    Container vargsiukai, galvociai;
+    vector<Stud> vargsiukai, galvociai;
     if (strategija==1){
         strategija_1(studentai, vargsiukai, galvociai);
     }
@@ -437,6 +377,3 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
     galvociai.clear();
     studentai.clear();
 }
-template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<vector<Stud>>(Stud&, vector<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&, int/*, int, int, int, int*/);
-template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<list<Stud>>(Stud&, list<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&, int/*, int, int, int, int*/);
-template void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius<deque<Stud>>(Stud&, deque<Stud>&, string, std::chrono::duration<double>&, std::chrono::duration<double>&, std::chrono::duration<double>&, int/*, int, int, int, int*/);

@@ -2,6 +2,7 @@
 #define TESTAVIMO_FUNKCIJOS_H
 
 #include "headers_main.h"
+#include "studentas.h"
 
 void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas);
 void testavimas(Stud &laikinas, vector<Stud> &studentai);
