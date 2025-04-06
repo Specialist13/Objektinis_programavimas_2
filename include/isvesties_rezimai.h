@@ -4,7 +4,6 @@
 #include "headers_main.h"
 #include "studentas.h"
 
-void isvestis_i_konsole (vector<Stud> &studentai);
-void isvestis_i_faila (vector<Stud> &studentai, string failas);
+void isvestis (std::ostream &out, vector<Stud> &studentai);
 
 #endif

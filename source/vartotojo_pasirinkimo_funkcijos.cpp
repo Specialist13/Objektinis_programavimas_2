@@ -53,12 +53,15 @@ void isvesties_pasirinkimas(vector<Stud> &studentai){
         cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
         ivesties_tikrinimas(pasirinkimas, tekstas);
     }
+    std::ofstream fr;
     switch(pasirinkimas){
         case 1:
-            isvestis_i_konsole(studentai);
+            isvestis(cout, studentai);
             break;
         case 2:
-            isvestis_i_faila(studentai, "rezultatai.txt");
+            fr.open("rezultatai.txt");
+            isvestis(fr, studentai);
+            fr.close();
             break;
         default:
             cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
