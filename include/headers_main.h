@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <chrono>
 #include <type_traits>
+#include <functional>
 
 using std::cin;
 using std::cout;
@@ -20,13 +21,5 @@ using std::string;
 using std::vector;
 using std::list;
 using std::deque;
-
-struct Stud {
-    string vardas, pavarde;
-    vector<int> pazymiai;
-    int egzaminas;
-    double galutinis_vid;
-    double galutinis_med;
-};
 
 #endif

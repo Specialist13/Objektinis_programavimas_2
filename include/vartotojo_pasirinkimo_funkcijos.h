@@ -3,11 +3,8 @@
 
 #include "headers_main.h"
 
-template <typename Container>
-void rezimo_pasirinkimas (Container &studentai);
-template <typename Container>
-void isvesties_pasirinkimas(Container &studentai);
-template <typename Container>
-void failo_pasirinkimas(Stud &laikinas, Container &studentai);
+void rezimo_pasirinkimas (vector<Stud> &studentai);
+void isvesties_pasirinkimas(vector<Stud> &studentai);
+void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai);
 
 #endif
