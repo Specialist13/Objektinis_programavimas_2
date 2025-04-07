@@ -27,7 +27,17 @@ Pasirinkus tęsti su vienu iš konteinerių, turėsite 8 pasirinkimus:
 7. Skirstyti studentus iš failo į vargšiukus ir galvočius – iš anksčiau sugeneruotų failų vykdomas skirstymas pagal vidurkį ir jo metu testuojama įvesties trukmė, rikiavimas ir skirstymas
 8. Baigti darbą
 
-# :chart: Testavimas
+# :chart: V1.1 Testavimas
+
+| Optimizavimo flag | Greitis 100000 (struct) | Greitis 1000000 (struct) | Failo dydis | Greitis 100000 (class) | Greitis 1000000 (class) | Failo dydis |
+| ----------------- | ----------------------- | ------------------------ | ----------- | ---------------------- | ----------------------- | ----------- |
+| Jokios | 1.3192 s | 16.5731 s | 639 KB | 1.4731 s | 21.7279 s | 408 KB |
+| O1 | 0.265992 s | 3.62595 s | 315 KB | 0.35424 s | 4.47669 s | 209 KB |
+| O2 | 0.317195 s | 3.70015 s | 275 KB | 0.348022 s | 3.93707 s | 199 KB |
+| O3 | 0.307315 s | 3.83817 s | 272 KB | 0.353762 s | 4.47141 s | 203 KB |
+
+
+# :chart: V1.0 Testavimas
 
 Programa buvo ištestuota pagal tris strategijas ir su trimis konteineriais:
 - Vector
