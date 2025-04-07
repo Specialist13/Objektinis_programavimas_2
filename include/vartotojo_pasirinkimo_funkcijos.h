@@ -6,6 +6,6 @@
 
 void rezimo_pasirinkimas (vector<Stud> &studentai);
 void isvesties_pasirinkimas(vector<Stud> &studentai);
-void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai);
+void failo_pasirinkimas(vector<Stud> &studentai);
 
 #endif

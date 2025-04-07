@@ -4,8 +4,8 @@
 #include "headers_main.h"
 #include "studentas.h"
 
-void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas);
-void testavimas(Stud &laikinas, vector<Stud> &studentai);
+void testinis_skaitymas_is_failo (vector<Stud> &studentai, string failas);
+void testavimas(vector<Stud> &studentai);
 void failo_kurimo_testavimas ();
 void duomenu_apdorojimo_testavimas();
 

@@ -3,7 +3,7 @@
 #include "../include/skaiciavimo_funkcijos.h"
 #include "../include/ivesties_rezimai.h"
 
-void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas){
+void testinis_skaitymas_is_failo (vector<Stud> &studentai, string failas){
     std::chrono::duration<double> laiku_suma{0};
     for (int i=0; i<5; i++){
         std::ifstream fd(failas);
@@ -18,27 +18,17 @@ void testinis_skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, strin
         std::getline(ss, linija);
         while (std::getline(ss, linija)){
             std::istringstream iss(linija);
-            iss >> laikinas.vardas >> laikinas.pavarde;
-            int pazymys;
-            while (iss >> pazymys){
-                laikinas.pazymiai.push_back(pazymys);
-            }
-            laikinas.egzaminas=laikinas.pazymiai.back();
-            laikinas.pazymiai.pop_back();
-            laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
-            laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
+            Stud laikinas(iss, "failas");
             studentai.push_back(laikinas);
-            laikinas.pazymiai.clear();
         }
         auto pabaiga=std::chrono::high_resolution_clock::now();
         laiku_suma+=pabaiga-pradzia;
         studentai.clear();
-        laikinas.vardas.clear();
     }
     cout<<"Skaitymo is failo laikas: "<<laiku_suma.count()/5<<" s\n";
 }
 
-void testavimas(Stud &laikinas, vector<Stud> &studentai){
+void testavimas(vector<Stud> &studentai){
     string failai[] = {"kursiokai.txt", "studentai10000.txt", "studentai100000.txt", "studentai1000000.txt"};
     string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite faila testavimui: ";
     int pasirinkimas;
@@ -49,11 +39,11 @@ void testavimas(Stud &laikinas, vector<Stud> &studentai){
         ivesties_tikrinimas(pasirinkimas, tekstas);
     }
     try {
-        testinis_skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1]);
+        testinis_skaitymas_is_failo(studentai, failai[pasirinkimas-1]);
     }
     catch (std::runtime_error klaida){
         std::cerr<<klaida.what()<<endl;
-        testavimas(laikinas, studentai);
+        testavimas(studentai);
     }
 }
 
@@ -124,7 +114,7 @@ void duomenu_apdorojimo_testavimas (){
             for (int i=0; i<5; i++){
                 Stud laikinas;
                 vector<Stud> studentai;
-                studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(laikinas, studentai, failas, ivesties_suma, rusiavimo_suma, skirstymo_suma, strategija/*, pasirinkimas1, pasirinkimas2, pasirinkimas3, pasirinkimas4*/);
+                studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius(studentai, failas, ivesties_suma, rusiavimo_suma, skirstymo_suma, strategija/*, pasirinkimas1, pasirinkimas2, pasirinkimas3, pasirinkimas4*/);
             }
             cout<<"Failas: "<<failas<<endl;
             cout<<"Ivesties trukme: "<<ivesties_suma.count()/5<<" s\n";

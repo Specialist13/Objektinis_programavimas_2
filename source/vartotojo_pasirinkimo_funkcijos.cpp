@@ -14,19 +14,19 @@ void rezimo_pasirinkimas (vector<Stud> &studentai){
         ivesties_tikrinimas(rezimas, tekstas);
         switch(rezimas){
             case 1:
-                ranka(laikinas, studentai);
+                ranka(studentai);
                 break;
             case 2:
-                pazymiu_generavimas(laikinas, studentai);
+                pazymiu_generavimas(studentai);
                 break;
             case 3:
-                visko_generavimas(laikinas, studentai);
+                visko_generavimas(studentai);
                 break;
             case 4:
-                failo_pasirinkimas(laikinas, studentai);
+                failo_pasirinkimas(studentai);
                 break;
             case 5:
-                testavimas(laikinas, studentai);
+                testavimas(studentai);
                 break;
             case 6:
                 failo_kurimo_testavimas();
@@ -69,7 +69,7 @@ void isvesties_pasirinkimas(vector<Stud> &studentai){
     }
 }
 
-void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
+void failo_pasirinkimas(vector<Stud> &studentai){
     string failai[] = {"kursiokai.txt", "studentai10000.txt", "studentai100000.txt", "studentai1000000.txt"};
     string tekstas="1 - kursiokai.txt\n2 - studentai10000.txt\n3 - studentai100000.txt\n4 - studentai1000000.txt\nPasirinkite faila: ";
     int pasirinkimas;
@@ -79,10 +79,10 @@ void failo_pasirinkimas(Stud &laikinas, vector<Stud> &studentai){
         ivesties_tikrinimas(pasirinkimas, tekstas);
     }
     try {
-        skaitymas_is_failo(laikinas, studentai, failai[pasirinkimas-1], false);
+        skaitymas_is_failo(studentai, failai[pasirinkimas-1], false);
     }
     catch (std::runtime_error klaida){
         std::cerr<<klaida.what()<<endl;
-        failo_pasirinkimas(laikinas, studentai);
+        failo_pasirinkimas(studentai);
     }
 }
