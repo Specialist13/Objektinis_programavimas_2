@@ -21,6 +21,7 @@ public:
     inline double getGalutinisMed() const { return galutinis_med; }
     std::istream& readStudent(std::istream&, string rezimas); 
     void skaiciuotiGalutini();
+    ~Stud() = default;
 };
 
 #endif
