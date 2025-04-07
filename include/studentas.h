@@ -14,12 +14,13 @@ private:
     double galutinis_med;
 public:
     Stud() : egzaminas(0) {}
-    Stud(std::istream& is);
+    Stud(std::istream& is, string rezimas);
     inline string getVardas() const { return vardas; }
     inline std::string getPavarde() const { return pavarde; }
     inline double getGalutinisVid() const { return galutinis_vid; }
     inline double getGalutinisMed() const { return galutinis_med; }
-    std::istream& readStudent(std::istream&); 
+    std::istream& readStudent(std::istream&, string rezimas); 
+    void Stud::skaiciuotiGalutini();
 };
 
 #endif

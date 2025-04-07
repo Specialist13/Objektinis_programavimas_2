@@ -19,144 +19,45 @@ void strategija_1(vector<Stud> &studentai, vector<Stud> &vargsiukai, vector<Stud
     galvociai.shrink_to_fit();
 }
 
-void ranka (Stud &laikinas, vector<Stud> &studentai){
-    string tekstas;
-    cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
-    while (laikinas.vardas!="n"){
-        tekstas="Iveskite studento varda: ";
-        ivesties_tikrinimas(laikinas.vardas, tekstas);
-
-        if (laikinas.vardas=="n"){
-            break;
-        }
-
-        tekstas="Iveskite studento pavarde: ";
-        ivesties_tikrinimas(laikinas.pavarde, tekstas);
-
-        cout<<"Veskite jo pazymius. Kai noresite baigti, iveskite '0'.\n";
-        while (true){
-            tekstas="Iveskite pazymi: ";
-            int pazymys;
-            ivesties_tikrinimas(pazymys, tekstas);
-
-            if (pazymys==0){
-                break;
-            }
-            else if (pazymys<0 || pazymys>10){
-                cout<<"Neteisingas pazymys. Bandykite dar karta.\n";
-                continue;
-            }
-            laikinas.pazymiai.push_back(pazymys);
-        }
-
-        tekstas="Iveskite studento egzamino pazymi: ";
-        ivesties_tikrinimas(laikinas.egzaminas, tekstas);
-        while (laikinas.egzaminas<0 || laikinas.egzaminas>10){
-            cout<<"Neteisingas pazymys. Bandykite dar karta.\n";
-            ivesties_tikrinimas(laikinas.egzaminas, tekstas);
-        }
-
-        laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
-        laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
-        studentai.push_back(laikinas);
-        laikinas.pazymiai.clear();
-    }
-    isvesties_pasirinkimas(studentai);
-    studentai.clear();
-    laikinas.vardas.clear();
-}
-
-void pazymiu_generavimas (Stud &laikinas, vector<Stud> &studentai){
-    srand(time(NULL));
-    string tekstas;
-    cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
-    while (laikinas.vardas!="n"){
-        tekstas="Iveskite studento varda: ";
-        ivesties_tikrinimas(laikinas.vardas, tekstas);
-
-        if (laikinas.vardas=="n"){
-            break;
-        }
-
-        tekstas="Iveskite studento pavarde: ";
-        ivesties_tikrinimas(laikinas.pavarde, tekstas);
+void ranka(vector<Stud> &studentai) {
+    cout << "Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
+    
+    while (true) {
+        Stud laikinas(std::cin, "ranka");
         
-        int n=rand()%10+1;
-        for (int j=0; j<n; j++){
-            int pazymys=rand()%10+1;
-            laikinas.pazymiai.push_back(pazymys);
+        if (laikinas.getVardas() == "n") {
+            break;
         }
-        laikinas.egzaminas=rand()%10+1;
-        laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
-        laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
+        
         studentai.push_back(laikinas);
-        laikinas.pazymiai.clear();
+    }
+    
+    isvesties_pasirinkimas(studentai);
+    studentai.clear();
+}
+
+void pazymiu_generavimas (vector<Stud> &studentai){
+    cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
+    while (true){
+        Stud laikinas(std::cin, "pazymiu_generavimas");
+        if (laikinas.getVardas() == "n"){
+            break;
+        }
+        studentai.push_back(laikinas);
     }
     isvesties_pasirinkimas(studentai);
     studentai.clear();
-    laikinas.vardas.clear();
 }
 
-void visko_generavimas (Stud &laikinas, vector<Stud> &studentai){
+void visko_generavimas (vector<Stud> &studentai){
     srand(time(NULL));
-
-    vector<string> vyriskiVardai = {
-        "Jonas", "Petras", "Marius", "Tadas", "Rokas", "Darius", "Arnas", "Justas", "Edvinas", "Tomas",
-        "Paulius", "Simas", "Lukas", "Andrius", "Rytis", "Ernestas", "Giedrius", "Mantas", "Deividas", "Vilius",
-        "Mindaugas", "Martynas", "Saulius", "Vytautas", "Tautvydas", "Sigitas", "Algirdas", "Gintaras", "Julius", "Remigijus",
-        "Kestas", "Vaidotas", "Audrius", "Augustas", "Nerijus", "Gediminas", "Raimundas", "Juozas", "Dainius", "Arvydas",
-        "Evaldas", "Zygimantas", "Vytenis", "Laurynas", "Arminas", "Rolandas", "Alvydas", "Laimonas", "Dominykas", "Tautvilas"
-    };
-    
-    vector<string> moteriskiVardai = {
-        "Ona", "Ieva", "Lina", "Egle", "Asta", "Rima", "Greta", "Aiste", "Monika", "Laura",
-        "Jurgita", "Dovile", "Karolina", "Viktorija", "Gabija", "Sandra", "Vaida", "Aurelija", "Kristina", "Evelina",
-        "Ruta", "Egle", "Aiste", "Indre", "Diana", "Viktorija", "Marija", "Aldona", "Gintare", "Alina",
-        "Birute", "Rita", "Raimonda", "Virginija", "Irena", "Jolanta", "Solveiga", "Vilma", "Lijana", "Agnė",
-        "Saulė", "Nida", "Grazina", "Danutė", "Liuda", "Daiva", "Jadvyga", "Sigita", "Jonė", "Vaida"
-    };
-    
-    vector<string> vyriskosPavardes = {
-        "Kazlauskas", "Petrauskas", "Jankauskas", "Paulauskas", "Butkus", "Navickas", "Sabonis", "Rimkus", "Grigas", "Urbonas",
-        "Brazinskas", "Šimkus", "Pocius", "Žukauskas", "Daukantas", "Blaževičius", "Stankūnas", "Grybauskas", "Vaičiulis", "Vaitkus",
-        "Rutkauskas", "Tamulis", "Kudirka", "Bagdonas", "Pavardenis", "Morkūnas", "Noreika", "Dapkus", "Žilinskas", "Venckus",
-        "Kairys", "Janušaitis", "Andriuškevičius", "Šimaitis", "Mockus", "Vaitkevičius", "Matulionis", "Aleknavičius", "Valančius", "Račkauskas",
-        "Giedraitis", "Petkevičius", "Radzevičius", "Žiogas", "Kalvaitis", "Baranauskas", "Masiulis", "Gervė", "Balčiūnas", "Mačiulis"
-    };
-    
-    vector<string> moteriskosPavardes = {
-        "Kazlauskaitė", "Petrauskaitė", "Jankauskaitė", "Paulauskaitė", "Butkutė", "Navickaitė", "Sabonytė", "Rimkutė", "Grigaitė", "Urbonaitė",
-        "Brazinskaitė", "Šimkutė", "Pociūtė", "Žukauskaitė", "Daukantaitė", "Blaževičiūtė", "Stankūnaitė", "Grybauskaitė", "Vaičiulienė", "Vaitkienė",
-        "Rutkauskaitė", "Tamulytė", "Kudirkaitė", "Bagdonaitė", "Morkūnaitė", "Noreikaitė", "Dapkutė", "Žilinskaitė", "Venckutė", "Kairytė",
-        "Janušaitė", "Andriuškevičiūtė", "Šimaitė", "Mockutė", "Vaitkevičiūtė", "Matulionytė", "Aleknavičiūtė", "Valančiūtė", "Račkauskaitė", "Giedraitė",
-        "Petkevičiūtė", "Radzevičiūtė", "Žiogaitė", "Kalvaitė", "Baranauskaitė", "Masiulytė", "Balčiūnaitė", "Mačiulytė", "Gervaitė", "Daukšytė"
-    };
-
     int k=rand()%10+1;
     for (int i=0; i<k; i++){
-        int lytis=rand()%2, v=rand()%50, p=rand()%50;
-        if (lytis==0){
-            laikinas.vardas=vyriskiVardai[v];
-            laikinas.pavarde=vyriskosPavardes[p];
-        }
-        else {
-            laikinas.vardas=moteriskiVardai[v];
-            laikinas.pavarde=moteriskosPavardes[p];
-        }
-        int n=rand()%10+1;
-        for (int j=0; j<n; j++){
-            int pazymys=rand()%10+1;
-            laikinas.pazymiai.push_back(pazymys);
-        }
-        laikinas.egzaminas=rand()%10+1;
-        laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
-        laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
+        Stud laikinas(std::cin, "visko_generavimas");
         studentai.push_back(laikinas);
-        laikinas.pazymiai.clear();
     }
     isvesties_pasirinkimas(studentai);
     studentai.clear();
-    laikinas.vardas.clear();
 }
 
 void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas, bool testavimas){
@@ -234,120 +135,6 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
     
     std::sort(studentai.begin(), studentai.end(), raktas_gv);
     
-    /*if (pasirinkimas1==5){
-        return;
-    }
-
-    if constexpr (std::is_same_v<Container, std::list<Stud>>){
-        switch (pasirinkimas1){
-            case 1:
-                vargsiukai.sort(raktas_v);
-                break;
-            case 2:
-                vargsiukai.sort(raktas_p);
-                break;
-            case 3:
-                vargsiukai.sort(raktas_gv);
-                break;
-            case 4:
-                vargsiukai.sort(raktas_gm);
-                break;
-            case 5:
-                break;
-            default:
-                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-                return;
-        }
-    }
-    else {
-        switch (pasirinkimas1){
-            case 1:
-                std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_v);
-                break;
-            case 2:
-                std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_p);
-                break;
-            case 3:
-                std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_gv);
-                break;
-            case 4:
-                std::sort(vargsiukai.begin(), vargsiukai.end(), raktas_gm);
-                break;
-            case 5:
-                break;
-            default:
-                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-                return;
-        }
-    }
-    
-    if (pasirinkimas2==2){
-        if constexpr (std::is_same_v<Container, std::list<Stud>>){
-            studentai.reverse();
-        }
-        else {
-            std::reverse(vargsiukai.begin(), vargsiukai.end());
-        }
-    }
-
-
-    if (pasirinkimas3==5){
-        return;
-    }
-
-
-    if constexpr (std::is_same_v<Container, std::list<Stud>>){
-        switch (pasirinkimas3){
-            case 1:
-                galvociai.sort(raktas_v);
-                break;
-            case 2:
-                galvociai.sort(raktas_p);
-                break;
-            case 3:
-                galvociai.sort(raktas_gv);
-                break;
-            case 4:
-                galvociai.sort(raktas_gm);
-                break;
-            case 5:
-                break;
-            default:
-                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-                return;
-        }
-    }
-    else {
-        switch (pasirinkimas3){
-            case 1:
-                std::sort(galvociai.begin(), galvociai.end(), raktas_v);
-                break;
-            case 2:
-                std::sort(galvociai.begin(), galvociai.end(), raktas_p);
-                break;
-            case 3:
-                std::sort(galvociai.begin(), galvociai.end(), raktas_gv);
-                break;
-            case 4:
-                std::sort(galvociai.begin(), galvociai.end(), raktas_gm);
-                break;
-            case 5:
-                break;
-            default:
-                cout<<"Neteisingas pasirinkimas. Bandykite dar karta.\n";
-                return;
-        }
-    }
-    
-    if (pasirinkimas4==2){
-        if constexpr (std::is_same_v<Container, std::list<Stud>>){
-            galvociai.reverse();
-        }
-        else {
-            std::reverse(galvociai.begin(), galvociai.end());
-        }
-    }*/
-
     auto rusiavimo_pabaiga=std::chrono::high_resolution_clock::now();
     rusiavimo_suma+=rusiavimo_pabaiga-rusiavimo_pradzia;
     auto skirstymo_pradzia=std::chrono::high_resolution_clock::now();
