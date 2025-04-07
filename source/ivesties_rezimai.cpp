@@ -60,7 +60,7 @@ void visko_generavimas (vector<Stud> &studentai){
     studentai.clear();
 }
 
-void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas, bool testavimas){
+void skaitymas_is_failo (vector<Stud> &studentai, string failas, bool testavimas){
     std::ifstream fd(failas);
     if (fd.fail()){
         throw std::runtime_error("Failas nerastas.");
@@ -72,22 +72,12 @@ void skaitymas_is_failo (Stud &laikinas, vector<Stud> &studentai, string failas,
     std::getline(ss, linija);
     while (std::getline(ss, linija)){
         std::istringstream iss(linija);
-        iss >> laikinas.vardas >> laikinas.pavarde;
-        int pazymys;
-        while (iss >> pazymys){
-            laikinas.pazymiai.push_back(pazymys);
-        }
-        laikinas.egzaminas=laikinas.pazymiai.back();
-        laikinas.pazymiai.pop_back();
-        laikinas.galutinis_vid=vidurkis(laikinas.pazymiai, laikinas.egzaminas);
-        laikinas.galutinis_med=mediana(laikinas.pazymiai, laikinas.egzaminas);
+        Stud laikinas(iss, "failas");
         studentai.push_back(laikinas);
-        laikinas.pazymiai.clear();
     }
     if (!testavimas){
         isvesties_pasirinkimas(studentai);
         studentai.clear();
-        laikinas.vardas.clear();
     }    
 }
 
@@ -103,32 +93,35 @@ void failu_generavimas(int n){
     fd<<std::left<< std::setw(15) <<"Vardas"<< std::setw(15) <<"Pavarde"<< std::setw(15) <<"ND1"<<std::setw(15) <<"ND2"<<std::setw(15) <<"ND3"<<std::setw(15) <<"ND4"<< std::setw(15) <<std::setw(15) <<"ND5"<<std::setw(15) <<"Egzaminas\n";
 
     srand(time(NULL));
+    string vardas, pavarde;
+    vector<int> pazymiai;
+    int egzaminas;
+    double galutinis_vid, galutinis_med;
     for (int i = 0; i < n; ++i) {
-        Stud laikinas;
-        laikinas.vardas = "Vardas" + std::to_string(i + 1);
-        laikinas.pavarde = "Pavarde" + std::to_string(i + 1);
+        vardas = "Vardas" + std::to_string(i + 1);
+        pavarde = "Pavarde" + std::to_string(i + 1);
         int pazymiu_kiekis = 5;
         for (int j = 0; j < pazymiu_kiekis; ++j) {
-            laikinas.pazymiai.push_back(rand() % 10 + 1);
+            pazymiai.push_back(rand() % 10 + 1);
         }
-        laikinas.egzaminas = rand() % 10 + 1;
-        laikinas.galutinis_vid = vidurkis(laikinas.pazymiai, laikinas.egzaminas);
-        laikinas.galutinis_med = mediana(laikinas.pazymiai, laikinas.egzaminas);
+        egzaminas = rand() % 10 + 1;
+        galutinis_vid = vidurkis(pazymiai, egzaminas);
+        galutinis_med = mediana(pazymiai, egzaminas);
 
-        fd <<std::left<< std::setw(15) << laikinas.vardas << std::setw(15)  << laikinas.pavarde;
-        for (int pazymys : laikinas.pazymiai) {
+        fd <<std::left<< std::setw(15) << vardas << std::setw(15)  << pavarde;
+        for (int pazymys : pazymiai) {
             fd <<std::left<< std::setw(15) << pazymys << " ";
         }
-        fd <<std::left<< std::setw(15) << laikinas.egzaminas << "\n";
+        fd <<std::left<< std::setw(15) << egzaminas << "\n";
     }
 
     fd.close();
     cout << "Failas sukurtas: " << filename << "\n";
 }
 
-void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas, vector<Stud> &studentai, string failas, std::chrono::duration<double>  &ivesties_suma, std::chrono::duration<double>  &rusiavimo_suma, std::chrono::duration<double>  &skirstymo_suma, int strategija/*, int pasirinkimas1, int pasirinkimas2, int pasirinkimas3, int pasirinkimas4*/){
+void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (vector<Stud> &studentai, string failas, std::chrono::duration<double>  &ivesties_suma, std::chrono::duration<double>  &rusiavimo_suma, std::chrono::duration<double>  &skirstymo_suma, int strategija/*, int pasirinkimas1, int pasirinkimas2, int pasirinkimas3, int pasirinkimas4*/){
     auto ivesties_pradzia=std::chrono::high_resolution_clock::now();
-    skaitymas_is_failo(laikinas, studentai, failas, true);
+    skaitymas_is_failo(studentai, failas, true);
     auto ivesties_pabaiga=std::chrono::high_resolution_clock::now();
     ivesties_suma+=ivesties_pabaiga-ivesties_pradzia;
     auto rusiavimo_pradzia=std::chrono::high_resolution_clock::now();
@@ -139,26 +132,14 @@ void studentu_skaitymas_ir_skirstymas_i_vargsiukus_ir_galvocius (Stud &laikinas,
     rusiavimo_suma+=rusiavimo_pabaiga-rusiavimo_pradzia;
     auto skirstymo_pradzia=std::chrono::high_resolution_clock::now();
     vector<Stud> vargsiukai, galvociai;
-    if (strategija==1){
-        strategija_1(studentai, vargsiukai, galvociai);
-    }
-    else if (strategija==2){
-        strategija_2(studentai, galvociai);
-    }
-    else if (strategija==3){
-        strategija_3(studentai, vargsiukai, galvociai);
-    }
-    
+    strategija_1(studentai, vargsiukai, galvociai);
     
     auto skirstymo_pabaiga=std::chrono::high_resolution_clock::now();
-    if (strategija==1 || strategija==3){
-        isvestis_i_faila(vargsiukai, "vargsiukai.txt");
-        isvestis_i_faila(galvociai, "galvociai.txt");
-    }
-    else if (strategija==2){
-        isvestis_i_faila(galvociai, "galvociai.txt");
-        isvestis_i_faila(studentai, "vargsiukai.txt");
-    }
+    std::ofstream fd("vargsiukai.txt");
+    isvestis(fd, vargsiukai);
+    fd.close();
+    std::ofstream fd2("galvociai.txt");
+    isvestis(fd2, galvociai);
     skirstymo_suma+=skirstymo_pabaiga-skirstymo_pradzia;
     vargsiukai.clear();
     galvociai.clear();

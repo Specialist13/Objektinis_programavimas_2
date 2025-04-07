@@ -1,6 +1,6 @@
-#include "studentas.h"
-#include "ivesties_tikrinimas.h"
-#include "skaiciavimo_funkcijos.h"
+#include "../include/studentas.h"
+#include "../include/ivesties_tikrinimas.h"
+#include "../include/skaiciavimo_funkcijos.h"
 
 Stud::Stud(std::istream& is, string rezimas) { 
     readStudent(is, rezimas);  
@@ -46,14 +46,47 @@ std::istream& Stud::readStudent(std::istream& is, string rezimas) {
     }    
 
     if (rezimas=="visko_generavimas") {
-        srand(time(NULL));
-        int n = rand() % 10 + 1;
-        for (int j = 0; j < n; j++) {
-            int pazymys = rand() % 10 + 1;
-            pazymiai.push_back(pazymys);
+        vector<string> vyriskiVardai = {
+            "Jonas", "Petras", "Marius", "Tadas", "Rokas", "Darius", "Arnas", "Justas", "Edvinas", "Tomas",
+            "Paulius", "Simas", "Lukas", "Andrius", "Rytis", "Ernestas", "Giedrius", "Mantas", "Deividas", "Vilius",
+            "Mindaugas", "Martynas", "Saulius", "Vytautas", "Tautvydas", "Sigitas", "Algirdas", "Gintaras", "Julius", "Remigijus",
+            "Kestas", "Vaidotas", "Audrius", "Augustas", "Nerijus", "Gediminas", "Raimundas", "Juozas", "Dainius", "Arvydas",
+            "Evaldas", "Zygimantas", "Vytenis", "Laurynas", "Arminas", "Rolandas", "Alvydas", "Laimonas", "Dominykas", "Tautvilas"
+        };
+        
+        vector<string> moteriskiVardai = {
+            "Ona", "Ieva", "Lina", "Egle", "Asta", "Rima", "Greta", "Aiste", "Monika", "Laura",
+            "Jurgita", "Dovile", "Karolina", "Viktorija", "Gabija", "Sandra", "Vaida", "Aurelija", "Kristina", "Evelina",
+            "Ruta", "Egle", "Aiste", "Indre", "Diana", "Viktorija", "Marija", "Aldona", "Gintare", "Alina",
+            "Birute", "Rita", "Raimonda", "Virginija", "Irena", "Jolanta", "Solveiga", "Vilma", "Lijana", "Agnė",
+            "Saulė", "Nida", "Grazina", "Danutė", "Liuda", "Daiva", "Jadvyga", "Sigita", "Jonė", "Vaida"
+        };
+        
+        vector<string> vyriskosPavardes = {
+            "Kazlauskas", "Petrauskas", "Jankauskas", "Paulauskas", "Butkus", "Navickas", "Sabonis", "Rimkus", "Grigas", "Urbonas",
+            "Brazinskas", "Šimkus", "Pocius", "Žukauskas", "Daukantas", "Blaževičius", "Stankūnas", "Grybauskas", "Vaičiulis", "Vaitkus",
+            "Rutkauskas", "Tamulis", "Kudirka", "Bagdonas", "Pavardenis", "Morkūnas", "Noreika", "Dapkus", "Žilinskas", "Venckus",
+            "Kairys", "Janušaitis", "Andriuškevičius", "Šimaitis", "Mockus", "Vaitkevičius", "Matulionis", "Aleknavičius", "Valančius", "Račkauskas",
+            "Giedraitis", "Petkevičius", "Radzevičius", "Žiogas", "Kalvaitis", "Baranauskas", "Masiulis", "Gervė", "Balčiūnas", "Mačiulis"
+        };
+        
+        vector<string> moteriskosPavardes = {
+            "Kazlauskaitė", "Petrauskaitė", "Jankauskaitė", "Paulauskaitė", "Butkutė", "Navickaitė", "Sabonytė", "Rimkutė", "Grigaitė", "Urbonaitė",
+            "Brazinskaitė", "Šimkutė", "Pociūtė", "Žukauskaitė", "Daukantaitė", "Blaževičiūtė", "Stankūnaitė", "Grybauskaitė", "Vaičiulienė", "Vaitkienė",
+            "Rutkauskaitė", "Tamulytė", "Kudirkaitė", "Bagdonaitė", "Morkūnaitė", "Noreikaitė", "Dapkutė", "Žilinskaitė", "Venckutė", "Kairytė",
+            "Janušaitė", "Andriuškevičiūtė", "Šimaitė", "Mockutė", "Vaitkevičiūtė", "Matulionytė", "Aleknavičiūtė", "Valančiūtė", "Račkauskaitė", "Giedraitė",
+            "Petkevičiūtė", "Radzevičiūtė", "Žiogaitė", "Kalvaitė", "Baranauskaitė", "Masiulytė", "Balčiūnaitė", "Mačiulytė", "Gervaitė", "Daukšytė"
+        };
+
+        int lytis=rand()%2, v=rand()%50, p=rand()%50;
+        if (lytis==0){
+            vardas=vyriskiVardai[v];
+            pavarde=vyriskosPavardes[p];
         }
-        egzaminas = rand() % 10 + 1;
-        skaiciuotiGalutini();
+        else {
+            vardas=moteriskiVardai[v];
+            pavarde=moteriskosPavardes[p];
+        }
     }
 
     if (rezimas=="pazymiu_generavimas" || rezimas=="visko_generavimas") {
@@ -67,6 +100,16 @@ std::istream& Stud::readStudent(std::istream& is, string rezimas) {
         skaiciuotiGalutini();
     }
 
+    if (rezimas=="failas") {
+        is >> vardas >> pavarde;
+        int pazymys;
+        while (is >> pazymys){
+            pazymiai.push_back(pazymys);
+        }
+        egzaminas=pazymiai.back();
+        pazymiai.pop_back();
+        skaiciuotiGalutini();
+    }
     
     return is;
 }
