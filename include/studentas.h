@@ -21,7 +21,30 @@ public:
     inline double getGalutinisMed() const { return galutinis_med; }
     std::istream& readStudent(std::istream&, string rezimas); 
     void skaiciuotiGalutini();
-    ~Stud() = default;
+    ~Stud() {
+        vardas.clear();
+        pavarde.clear();
+        pazymiai.clear();
+    }
+    Stud(const Stud &s) {
+        vardas = s.vardas;
+        pavarde = s.pavarde;
+        pazymiai = s.pazymiai;
+        egzaminas = s.egzaminas;
+        galutinis_vid = s.galutinis_vid;
+        galutinis_med = s.galutinis_med;
+    }
+    Stud& operator=(const Stud &s) {
+        if (this != &s) {
+            vardas = s.vardas;
+            pavarde = s.pavarde;
+            pazymiai = s.pazymiai;
+            egzaminas = s.egzaminas;
+            galutinis_vid = s.galutinis_vid;
+            galutinis_med = s.galutinis_med;
+        }
+        return *this;
+    }
 };
 
 #endif
