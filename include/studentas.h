@@ -64,6 +64,28 @@ public:
         }
         return *this;
     }
+
+    friend std::ostream& operator<<(std::ostream& os, const Stud& s) {
+        os << std::left<<std::setw(25)<< s.vardas <<std::setw(25)<< s.pavarde <<std::setw(25)<< std::fixed << std::setprecision(2) << s.galutinis_vid << std::setw(25)<< s.galutinis_med;
+        return os;
+    }
+
+    friend std::istream& operator>>(std::istream& is, Stud& s) {
+        string vardas;
+        is >> vardas;
+        if (vardas == "n") {
+            return is;
+        }
+        s.vardas=vardas;
+        is >> s.pavarde;
+        int pazymys;
+        while (is >> pazymys && pazymys != -1) {
+            s.pazymiai.push_back(pazymys);
+        }
+        is >> s.egzaminas;
+        return is;
+    }
+
 };
 
 #endif
