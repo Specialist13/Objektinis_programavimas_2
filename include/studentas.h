@@ -53,6 +53,17 @@ public:
         galutinis_vid = s.galutinis_vid;
         galutinis_med = s.galutinis_med;
     }
+    Stud& operator=(Stud &&s) noexcept {
+        if (this != &s) {
+            vardas = std::move(s.vardas);
+            pavarde = std::move(s.pavarde);
+            pazymiai = std::move(s.pazymiai);
+            egzaminas = s.egzaminas;
+            galutinis_vid = s.galutinis_vid;
+            galutinis_med = s.galutinis_med;
+        }
+        return *this;
+    }
 };
 
 #endif
