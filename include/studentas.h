@@ -10,8 +10,8 @@ private:
     string pavarde;
     vector<int> pazymiai;
     int egzaminas;
-    double galutinis_vid;
-    double galutinis_med;
+    double galutinis_vid=-1;
+    double galutinis_med=-1;
 public:
     Stud() : egzaminas(0) {}
     Stud(std::istream& is, string rezimas);
@@ -25,6 +25,7 @@ public:
         vardas.clear();
         pavarde.clear();
         pazymiai.clear();
+        cout<<"Destruktorius\n";
     }
     Stud(const Stud &s) {
         vardas = s.vardas;
@@ -83,6 +84,7 @@ public:
             s.pazymiai.push_back(pazymys);
         }
         is >> s.egzaminas;
+        s.skaiciuotiGalutini();
         return is;
     }
 

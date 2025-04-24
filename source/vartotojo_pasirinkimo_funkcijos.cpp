@@ -4,13 +4,14 @@
 #include "../include/ivesties_tikrinimas.h"
 #include "../include/rikiavimo_funckija.h"
 #include "../include/testavimo_funkcijos.h"
+#include "../include/studentas_testai.h"
 
 void rezimo_pasirinkimas (vector<Stud> &studentai){
     int rezimas=0;
     Stud laikinas;
     string tekstas;
-    while (rezimas!=8){
-        tekstas="Pasirinkite programos rezima.\n1 - Duomenu ivedimas ranka\n2 - Pazymiu generavimas\n3 - Pazymiu ir vardu generavimas\n4 - Skaityti duomenis is failo\n5 - Testuoti ivesties laika\n6 - Kurti faila ir testuoti jo sukurimo laika\n7 - Skirstyti studentus is failo i vargsiukus ir galvocius\n8 - Baigti darba\nIveskite pasirinkima: ";
+    while (rezimas!=9){
+        tekstas="Pasirinkite programos rezima.\n1 - Duomenu ivedimas ranka\n2 - Pazymiu generavimas\n3 - Pazymiu ir vardu generavimas\n4 - Skaityti duomenis is failo\n5 - Testuoti ivesties laika\n6 - Kurti faila ir testuoti jo sukurimo laika\n7 - Skirstyti studentus is failo i vargsiukus ir galvocius\n8 - Testuoti Stud klases metodus\n9 - Baigti darba\nIveskite pasirinkima: ";
         ivesties_tikrinimas(rezimas, tekstas);
         switch(rezimas){
             case 1:
@@ -34,7 +35,16 @@ void rezimo_pasirinkimas (vector<Stud> &studentai){
             case 7:
                 duomenu_apdorojimo_testavimas();
                 break;
-            case 8:
+            case 8: {
+                bool testas = testAll();
+                if (testas) {
+                    cout << "Visi testai sekmingai praeiti!\n";
+                } else {
+                    cout << "Testai nepraeiti.\n";
+                }
+                break;
+            }
+            case 9:
                 cout<<"Viso gero!\n";
                 break;
             default:
