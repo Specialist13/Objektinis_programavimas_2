@@ -3,33 +3,28 @@
 
 #include "headers_main.h"
 #include "skaiciavimo_funkcijos.h"
+#include "zmogus.h"
 
-class Stud {
+class Stud : public Zmogus {
 private:
-    string vardas;
-    string pavarde;
     vector<int> pazymiai;
     int egzaminas;
     double galutinis_vid=-1;
     double galutinis_med=-1;
 public:
-    Stud() : egzaminas(0) {}
+    Stud() : Zmogus("", ""), egzaminas(0) {}
     Stud(std::istream& is, string rezimas);
-    inline string getVardas() const { return vardas; }
-    inline std::string getPavarde() const { return pavarde; }
+    inline string getVardas() const override { return vardas; }
+    inline string getPavarde() const override { return pavarde; }
     inline double getGalutinisVid() const { return galutinis_vid; }
     inline double getGalutinisMed() const { return galutinis_med; }
     std::istream& readStudent(std::istream&, string rezimas); 
     void skaiciuotiGalutini();
     ~Stud() {
-        vardas.clear();
-        pavarde.clear();
         pazymiai.clear();
         cout<<"Destruktorius\n";
     }
-    Stud(const Stud &s) {
-        vardas = s.vardas;
-        pavarde = s.pavarde;
+    Stud(const Stud &s) : Zmogus(s) {
         pazymiai = s.pazymiai;
         egzaminas = s.egzaminas;
         galutinis_vid = s.galutinis_vid;
@@ -46,9 +41,7 @@ public:
         }
         return *this;
     }
-    Stud(Stud &&s) noexcept {
-        vardas = std::move(s.vardas);
-        pavarde = std::move(s.pavarde);
+    Stud(Stud &&s) noexcept : Zmogus(std::move(s)) {
         pazymiai = std::move(s.pazymiai);
         egzaminas = s.egzaminas;
         galutinis_vid = s.galutinis_vid;
@@ -67,13 +60,16 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Stud& s) {
-        os << std::left<<std::setw(25)<< s.vardas <<std::setw(25)<< s.pavarde <<std::setw(25)<< std::fixed << std::setprecision(2) << s.galutinis_vid << std::setw(25)<< s.galutinis_med;
+        os << std::left<<std::setw(25)<< s.getVardas() <<std::setw(25)<< s.getPavarde() <<std::setw(25)<< std::fixed << std::setprecision(2) << s.galutinis_vid << std::setw(25)<< s.galutinis_med;
         return os;
     }
 
     friend std::istream& operator>>(std::istream& is, Stud& s) {
         s.pazymiai.clear();
-        is >> s.vardas >> s.pavarde;
+        string v, p;
+        is >> v >> p;
+        s.setVardas(v);
+        s.setPavarde(p);
     
         int pazymys;
         bool isCin = (&is == &std::cin);

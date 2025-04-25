@@ -28,12 +28,15 @@ public:
         return *this;
     }
 
-    ~Zmogus() {
+    virtual ~Zmogus() {
         vardas.clear();
         pavarde.clear();
     }
     virtual string getVardas() const = 0;
     virtual string getPavarde() const = 0;
+
+    void setVardas(const string& v) { vardas = v; }
+    void setPavarde(const string& p) { pavarde = p; }
 };
 
 #endif
