@@ -18,7 +18,11 @@ Atsidarę programą turėsite 9 pasirinkimus:
 8. Testuoti Stud klasės metodus
 9. Baigti darbą
 
-# :notebook_with_decorative_cover: Klasės naudojimosi instrukcijos
+# :notebook_with_decorative_cover: Klasės aprašymas ir naudojimosi instrukcijos
+
+### Aprašymas
+
+Klasė Stud, su kuria dirbama projekte, yra išvestinė iš bazinės klasės Zmogus. Zmogus turi reikšmes vardas ir pavardė, o Stud klasė papildo likusiomis (pažymiais, egzamino įvertinimu, vidurkiais).
 
 ### Įvesties operatorius
 
