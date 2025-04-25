@@ -66,7 +66,7 @@ bool testMoveAssignmentOperator() {
     return true;
 }
 bool testInputOperator() {
-    std::istringstream input("Ona\nOnaite\n10 9 8 7 6 -1\n10\n");
+    std::istringstream input("Ona\nOnaite\n10 9 8 7 6\n10\n");
     Stud student;
     input >> student;
     if (student.getVardas() != "Ona" || student.getPavarde() != "Onaite" || student.getGalutinisVid() != 9.2 || student.getGalutinisMed() != 9.2) {

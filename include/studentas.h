@@ -72,18 +72,24 @@ public:
     }
 
     friend std::istream& operator>>(std::istream& is, Stud& s) {
-        string vardas;
-        is >> vardas;
-        if (vardas == "n") {
-            return is;
-        }
-        s.vardas=vardas;
-        is >> s.pavarde;
+        s.pazymiai.clear();
+        is >> s.vardas >> s.pavarde;
+    
         int pazymys;
-        while (is >> pazymys && pazymys != -1) {
+        bool isCin = (&is == &std::cin);
+    
+        while (is >> pazymys) {
+            if (isCin && pazymys == -1) break;
             s.pazymiai.push_back(pazymys);
         }
-        is >> s.egzaminas;
+    
+        if (!isCin && !s.pazymiai.empty()) {
+            s.egzaminas = s.pazymiai.back();
+            s.pazymiai.pop_back();
+        } else if (isCin) {
+            is >> s.egzaminas;
+        }
+    
         s.skaiciuotiGalutini();
         return is;
     }
