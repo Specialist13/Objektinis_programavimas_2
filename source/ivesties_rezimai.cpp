@@ -37,6 +37,7 @@ void ranka(vector<Stud> &studentai) {
 }
 
 void pazymiu_generavimas (vector<Stud> &studentai){
+    srand(time(NULL));
     cout<<"Veskite duomenis apie studentus. Kai noresite baigti, iveskite 'n' kaip studento varda.\n";
     while (true){
         Stud laikinas(std::cin, "pazymiu_generavimas");
