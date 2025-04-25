@@ -90,7 +90,6 @@ std::istream& Stud::readStudent(std::istream& is, string rezimas) {
     }
 
     if (rezimas=="pazymiu_generavimas" || rezimas=="visko_generavimas") {
-        srand(time(NULL));
         int n = rand() % 10 + 1;
         for (int j = 0; j < n; j++) {
             int pazymys = rand() % 10 + 1;
