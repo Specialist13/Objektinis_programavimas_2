@@ -7,17 +7,7 @@
 
 # :keyboard: Naudojimosi instrukcijos
 
-Atsidarę programą turėsite 3 konteinerių, su kuriais norėsite vykdyti savo programą, pasirinkimus:
-
-1. Vector
-2. List
-3. Deque
-
-Taip pat bus galimybė iškart išjungti programą:
-
-4. Baigti darbą
-
-Pasirinkus tęsti su vienu iš konteinerių, turėsite 8 pasirinkimus:
+Atsidarę programą turėsite 9 pasirinkimus:
 1. Duomenų įvedimas ranka – turėsite vesti studentų vardus, pavardes, pažymius ir egzamino įvertinimą tiek kartų, kiek norėsite
 2. Pažymiu generavimas – turėsite vesti tik studentų vardus ir pavardes, pažymiai kiekvienam studentui bus atsitiktinai sugeneruoti
 3. Pažymiu ir vardų generavimas – visi duomenys apie studentus bus sugeneruoti (vardai ir pavardės atsitiktini iš fiksuoto sąrašo)
@@ -25,7 +15,18 @@ Pasirinkus tęsti su vienu iš konteinerių, turėsite 8 pasirinkimus:
 5. Testuoti įvesties laiką – tikrinama, kiek užtrunka įvesti duomenis iš norimo failo
 6. Kurti failą ir testuoti jo sukurimo laiką – galite pasirinkti, kokio dydžio studentų failą sugeneruosite
 7. Skirstyti studentus iš failo į vargšiukus ir galvočius – iš anksčiau sugeneruotų failų vykdomas skirstymas pagal vidurkį ir jo metu testuojama įvesties trukmė, rikiavimas ir skirstymas
-8. Baigti darbą
+8. Testuoti Stud klasės metodus
+9. Baigti darbą
+
+# :notebook_with_decorative_cover: Klasės naudojimosi instrukcijos
+
+### Įvesties operatorius
+
+Galite ranka vesti studento vardą, pavardę ir tiek pažymių, kiek norite, tik reikia nurodyti įvedimo pabaigą įrašant pažymį -1. Tuomet reikia įvesti dar vieną skaičių - egzamino pažymį. Jeigu vedate iš failo, bus nuskaitomas vardas, pavardė ir pažymiai bei egzaminas be poreikio atskirti egzaminą nuo pažymių skaičiumi -1.
+
+### Išvesties operatorius
+
+Išvedamas studento vardas, pavardė ir galutiniai pažymiai pagal vidurkį bei medianą kiekvienam duomeniui suteikiant po 25 laukelius ir rikiuojant kairėje.
 
 # :chart: Testavimas
 
