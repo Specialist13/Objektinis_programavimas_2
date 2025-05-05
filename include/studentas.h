@@ -55,6 +55,9 @@ public:
             egzaminas = s.egzaminas;
             galutinis_vid = s.galutinis_vid;
             galutinis_med = s.galutinis_med;
+            s.egzaminas = 0;
+            s.galutinis_vid = 0;
+            s.galutinis_med = 0;
         }
         return *this;
     }
