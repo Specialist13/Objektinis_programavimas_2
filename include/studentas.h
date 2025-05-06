@@ -22,7 +22,7 @@ public:
     void skaiciuotiGalutini();
     ~Stud() {
         pazymiai.clear();
-        cout<<"Destruktorius\n";
+        //cout<<"Destruktorius\n";
     }
     Stud(const Stud &s) : Zmogus(s) {
         pazymiai = s.pazymiai;

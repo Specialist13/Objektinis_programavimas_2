@@ -25,9 +25,11 @@ gtest:
 
 # === Build and run tests ===
 test: gtest
-	$(CXX) $(CXXFLAGS) -I$(GTEST_INC) $(TEST_DIR)/*.cpp $(GTEST_LIB) -o $(TEST_APP)
+	$(CXX) $(CXXFLAGS) -I$(GTEST_INC) $(TEST_DIR)/*.cpp \
+    $(filter-out $(SRC_DIR)/main.cpp, $(wildcard $(SRC_DIR)/*.cpp)) \
+    $(GTEST_LIB) -o $(TEST_APP)
 	./$(TEST_APP)
-
+	
 # === Clean up ===
 clean:
 	del /Q *.exe *.o *.a 2>nul || exit 0
