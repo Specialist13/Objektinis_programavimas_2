@@ -18,6 +18,10 @@ Atsidarę programą turėsite 9 pasirinkimus:
 8. Testuoti Stud klasės metodus
 9. Baigti darbą
 
+# :wrench: Testavimo režimas
+
+Jeigu norite paleisti GoogleTest testų režimą, į komandinę eilutę turite įvesti ```mingw32-make clean``` ir ```mingw32-make test```. Visi testai aprašyti ***tests/studentas_tests.cpp***. Testų rezultatai matomi komandinėje eilutėje.
+
 # :notebook_with_decorative_cover: Klasės aprašymas ir naudojimosi instrukcijos
 
 ### Aprašymas
